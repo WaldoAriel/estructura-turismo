@@ -65,8 +65,8 @@ export default function Home() {
             right: { md: '5%' },
             top: '50%',
             transform: 'translateY(-50%)',
-            height: '70vh',
-            maxWidth: '40%',
+            height: '52.5vh',
+            maxWidth: '30%',
             opacity: 0.85,
             zIndex: 1,
           }}
