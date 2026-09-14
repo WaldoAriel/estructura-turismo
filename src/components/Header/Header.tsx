@@ -108,7 +108,13 @@ function renderMenuChildren(items: NavItem[], depth = 0, handleClose: () => void
         href={item.href || '#'}
         {...getLinkProps(item.href || '#')}
         onClick={handleClose}
-        sx={{ pl: 2 + depth, flexDirection: 'column', alignItems: 'flex-start' }}
+        sx={{
+          pl: 2 + depth,
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          color: '#f7fafc',
+          '&:hover': { backgroundColor: 'rgba(255,255,255,0.05)' },
+        }}
       >
         <Box sx={{ mb: 0.5 }}>{item.label}</Box>
         <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -121,7 +127,6 @@ function renderMenuChildren(items: NavItem[], depth = 0, handleClose: () => void
 
 function DesktopMenuButton({ item }: { item: TopMenuItem & { openBannerModal?: boolean } }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (item.children && item.children.length > 0) {
@@ -162,7 +167,33 @@ function DesktopMenuButton({ item }: { item: TopMenuItem & { openBannerModal?: b
        >
         {item.label}
       </Button>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ sx: { maxHeight: 400, minWidth: 240 } }}>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        MenuListProps={{
+          sx: { maxHeight: 400, width: '100vw', maxWidth: '100vw', bgcolor: '#1a202c' },
+        }}
+        PaperProps={{
+          sx: {
+            position: 'fixed',
+            top: { xs: 64, sm: 80, md: 120 },
+            left: 0,
+            width: '100vw',
+            maxWidth: '100vw',
+            bgcolor: '#1a202c',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            borderBottom: '1px solid #2d3748',
+          },
+        }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        BackdropProps={{
+          sx: {
+            backgroundColor: 'rgba(0,0,0,0.4)',
+          },
+        }}
+      >
         {renderMenuChildren(item.children, 0, handleClose)}
       </Menu>
     </>
