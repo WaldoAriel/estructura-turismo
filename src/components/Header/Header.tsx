@@ -199,7 +199,12 @@ export default function Header() {
         <Toolbar sx={{ height: { xs: 64, sm: 80, md: 120 }, px: 2 }}>
           {/* Left side: Logo only (title removed) */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton color="inherit" edge="start" onClick={() => setDrawerOpen(true)} sx={{ mr: 1 }}>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={() => setDrawerOpen(true)}
+              sx={{ mr: 1, display: { md: 'none' } }}
+            >
               <MenuIcon />
             </IconButton>
             <Box
