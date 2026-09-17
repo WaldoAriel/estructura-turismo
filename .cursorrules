@@ -1,0 +1,6 @@
+# Contexto del Proyecto y Stack de UI
+* **Framework de Componentes y Estilos:** Material UI (MUI v5+)
+* **Estado de Animaciones:** Solo animaciones por defecto de MUI. El objetivo es personalizarlas y mejorarlas usando las habilidades de Emil Kowalski.
+
+## Instrucciones para el Agente:
+Tienes a tu disposición las habilidades detalladas de Emil Kowalski dentro de la carpeta `.openchamber/`. Cada vez que te pida crear un componente, modificar un estilo o añadir movimiento, debes leer el archivo de la habilidad correspondiente para aplicar las curvas, opacidades y principios estéticos exactos sobre los componentes de MUI (usando la propiedad `sx`, `styled` o el sistema de transiciones de MUI).
