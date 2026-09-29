@@ -16,7 +16,7 @@ export interface MenuCardItem extends MenuItem {
 
 export const topMenuItems: TopMenuItem[] = [
   { label: 'Eventos', href: '/eventos' },
-  { label: 'Dónde Comer', href: '/comer' },
+  { label: 'Dónde Comer', href: 'https://guia-gastronomia.netlify.app' },
   { label: 'Dónde Dormir', href: 'https://alojamientos-src.netlify.app/' },
   { label: 'Imperdibles', href: '/imperdibles' },
   { label: 'Experiencias', href: '/experiencias' },
@@ -42,6 +42,7 @@ export const drawerMenuSections: MenuItem[][] = [
   [
     {
       label: 'Qué Hacer',
+      href: '/hacer',
       children: [
         { label: 'Cicloturismo', href: '/hacer/cicloturismo' },
         { label: 'Cabalgatas', href: '/hacer/cabalgatas' },
@@ -54,82 +55,49 @@ export const drawerMenuSections: MenuItem[][] = [
     {
       label: 'Qué Visitar',
       children: [
-        {
+         {
           label: 'Descubrí la naturaleza',
           children: [
             { label: 'Cerro Vía Crucis', href: '/visitar/naturaleza/cerro-via-crucis' },
-            { label: 'Reserva Natural La Cascada', href: '/visitar/naturaleza/reserva-la-cascada' },
+            { label: 'Reserva Natural La Cascada', href: '/visitar/naturaleza/reserva-natural-la-cascada' },
             { label: 'Desafío Aguarayba', href: '/visitar/naturaleza/desafio-aguarayba' },
-            { label: 'Circuito Arroyo Seco', href: '/visitar/naturaleza/circuito-arroyo-seco' },
-            { label: 'Costanera y Balnearios', href: '/visitar/naturaleza/costanera-balnearios' },
+            { label: 'Circuito del Arroyo Seco', href: '/visitar/naturaleza/circuito-del-arroyo-seco' },
+            { label: 'Costanera y Balnearios', href: '/visitar/naturaleza/costanera-y-balnearios' },
           ],
         },
         {
           label: 'Cultura y Entretenimiento',
           children: [
-            {
-              label: 'Atractivos Culturales',
-              children: [
-                { label: 'Calicanto Jesuita', href: '/visitar/cultura/calicanto' },
-                { label: 'Puente Colgante', href: '/visitar/cultura/puente-colgante' },
-                { label: 'Escalera de los Inmigrantes', href: '/visitar/cultura/escalera-inmigrantes' },
-                { label: 'Falla Geológica', href: '/visitar/cultura/falla-geologica' },
-                { label: 'Museo Estanislao Baños', href: '/visitar/cultura/museo-estanislao-banos' },
-                { label: 'Museo de Arte Religioso Santa Rosa de Lima', href: '/visitar/cultura/museo-arte-religioso' },
-              ],
-            },
-{
-  label: 'Esparcimiento',
-  children: [
-    { label: 'Sass', href: '/visitar/cultura/esparcimiento/sass' },
-    { label: 'Bowling', href: '/visitar/cultura/esparcimiento/bowling' },
-    { label: 'Arca de Noé', href: '/visitar/cultura/esparcimiento/arca-de-noe' },
-    { label: 'Cutulecita', href: '/visitar/cultura/esparcimiento/cutulecita' },
-    {
-      label: 'Cabalgatas',
-      children: [
-        { label: 'El Chulengo', href: '/visitar/cultura/esparcimiento/club-hipico' },
-        { label: 'Dafne Tribu Serrana', href: '/visitar/cultura/esparcimiento/dafne' },
-        { label: 'Alquiler de Caballos', href: '/visitar/cultura/esparcimiento/alquiler-caballos' },
-      ],
-    },
-    { label: 'Cine Teatro', href: '/visitar/cultura/esparcimiento/cine-teatro' },
-  ],
-},
-            {
-              label: 'Artesanos',
-              children: [
-                { label: 'Paseo de artesanos', href: '/visitar/cultura/artesanos/paseo-artesanos' },
-                { label: 'Manos calamuchitanas', href: '/visitar/cultura/artesanos/manos-calamuchitanas' },
-                { label: 'Hanceres Ancestrales', href: '/visitar/cultura/artesanos/hanceres-ancestrales' },
-              ],
-            },
-            {
-              label: 'Camino del Productor',
-              children: [
-                { label: 'Almacén del Mate', href: '/visitar/cultura/camino-productor/almacen-del-mate' },
-                { label: 'Esencias naturales De La Meca', href: '/visitar/cultura/camino-productor/esencias-la-meca' },
-                { label: 'Establecimiento Apícola Yullin', href: '/visitar/cultura/camino-productor/yullin' },
-                { label: 'Galería de Artes Quiroga', href: '/visitar/cultura/camino-productor/galeria-quiroga' },
-                { label: 'Orfebre Caminitti y Aguaribú Cerámica', href: '/visitar/cultura/camino-productor/orfebre-caminitti' },
-                { label: 'Cervecería Artesanal Emily Brau', href: '/visitar/cultura/camino-productor/emily-brau' },
-                { label: 'La Isabelina', href: '/visitar/cultura/camino-productor/la-isabelina' },
-              ],
-            },
+          {
+           label: 'Atractivos Culturales',
+           href: '/visitar/cultura/atractivos-culturales',
+          },
+          {
+            label: 'Esparcimiento',
+            href: '/visitar/cultura/esparcimiento',
+          },
+         {
+           label: 'Artesanos',
+           href: '/visitar/cultura/artesanos',
+         },
+         {
+           label: 'Camino del Productor',
+           href: '/visitar/cultura/camino-del-productor',
+         },
           ],
         },
-        {
+         {
           label: 'Paseos / Lugares de Interés',
           children: [
             { label: 'Complejo La Estancia', href: '/visitar/paseos/complejo-la-estancia' },
-            { label: 'Plazoleta del Tercer Milenio', href: '/visitar/paseos/plazoleta-tercer-milenio' },
-            { label: 'Monumento a la madre', href: '/visitar/paseos/monumento-madre' },
-            { label: 'Monumento a Güemes', href: '/visitar/paseos/monumento-guemes' },
-            { label: 'Mirador del Valle', href: '/visitar/paseos/mirador-valle' },
-            { label: 'Paseo del Remanso', href: '/visitar/paseos/paseo-remanso' },
+            { label: 'Plazoleta del Tercer Milenio', href: '/visitar/paseos/plazoleta-del-tercer-milenio' },
+            { label: 'Monumento a la Madre', href: '/visitar/paseos/monumento-a-la-madre' },
+            { label: 'Monumento a Güemes', href: '/visitar/paseos/monumento-a-guemes' },
+            { label: 'Mirador del Valle', href: '/visitar/paseos/mirador-del-valle' },
+            { label: 'Paseo del Remanso', href: '/visitar/paseos/paseo-del-remanso' },
             { label: 'Paseo Las Higueras', href: '/visitar/paseos/paseo-las-higueras' },
             { label: 'Paseo Libertad', href: '/visitar/paseos/paseo-libertad' },
-            { label: 'Paseo de la Historia', href: '/visitar/paseos/paseo-historia' },
+            { label: 'Paseo de la Historia', href: '/visitar/paseos/paseo-de-la-historia' },
             { label: 'Chau Sostenido', href: '/visitar/paseos/chau-sostenido' },
           ],
         },
