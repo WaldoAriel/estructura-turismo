@@ -132,6 +132,7 @@ function MegaMenuCard({ item, handleClose, index }: { item: NavItem; handleClose
           display: 'block',
           color: 'var(--color-text-primary)',
           fontWeight: 500,
+          textDecoration: 'none',
           '&:hover': {
             backgroundColor: 'var(--color-primary)1A',
             color: 'var(--color-primary)',
@@ -170,7 +171,7 @@ function MegaMenuCard({ item, handleClose, index }: { item: NavItem; handleClose
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' },
           gap: 1,
           pl: 1,
           pr: 2,
@@ -241,7 +242,7 @@ function MegaMenuCard({ item, handleClose, index }: { item: NavItem; handleClose
 
 function renderMegaMenuChildren(items: NavItem[], handleClose: () => void) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, p: 2 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, px: 2, py: 2, minWidth: 280 }}>
       {items.map((item, index) => (
         <MegaMenuCard key={item.label} item={item} handleClose={handleClose} index={index} />
       ))}
@@ -329,31 +330,24 @@ function DesktopMenuButton({
           sx: {
             bgcolor: 'transparent',
             color: 'var(--color-text-primary)',
-            width: '100vw',
-            maxWidth: '100vw',
-            maxHeight: 'calc(100vh - 120px)',
-            overflowY: 'auto',
             py: 2,
             pt: 0,
           },
         }}
         PaperProps={{
           sx: {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            maxWidth: '100vw',
             bgcolor: 'var(--color-background)',
             boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
             borderBottom: '1px solid var(--color-border)',
             zIndex: 10000,
             backdropFilter: 'blur(20px) saturate(180%)',
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+            borderRadius: '0 0 16px 16px',
+            maxWidth: 'calc(100vw - 48px)',
           },
         }}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         BackdropProps={{
           sx: {
             backgroundColor: 'rgba(0,0,0,0.3)',
