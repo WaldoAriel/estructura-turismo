@@ -42,3 +42,10 @@ export const HOVER_SHADOW = {
 } as const
 
 export const HOVER_SHADOW_CSS = 'box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1)'
+
+export const SPRING_BOUNCY = {
+  type: 'spring' as const,
+  damping: 18,
+  stiffness: 400,
+  restDelta: 2,
+}

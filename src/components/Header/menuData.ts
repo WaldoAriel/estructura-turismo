@@ -2,6 +2,7 @@ export interface MenuItem {
   label: string
   href?: string
   children?: MenuItem[]
+  description?: string
 }
 
 export interface TopMenuItem extends MenuItem {
@@ -18,8 +19,6 @@ export const topMenuItems: TopMenuItem[] = [
   { label: 'Eventos', href: '/eventos' },
   { label: 'Dónde Comer', href: 'https://guia-gastronomia.netlify.app' },
   { label: 'Dónde Dormir', href: 'https://alojamientos-src.netlify.app/' },
-  { label: 'Imperdibles', href: '/imperdibles' },
-  { label: 'Experiencias', href: '/experiencias' },
   { label: 'Clima' },
 ]
 

@@ -10,8 +10,9 @@ import {
   type VisitCategory,
 } from '../data/hacerData'
 import { SPRING_STANDARD, STAGGER_FAST, FADE_UP_CHILD } from '../config/animations'
+import { municipalGradients, municipalPalette } from '../config/theme'
 import Gallery from '../components/Gallery'
-import { municipalPalette } from '../config/theme'
+import Footer from '../components/Footer'
 
 export default function VisitarDetalle() {
   const { category, subcategory, item: itemParam } = useParams<{
@@ -121,7 +122,7 @@ export default function VisitarDetalle() {
     itemsToShow = allItems
   }
 
-  const baseGradient = visitarCategoryGradients[categoryData.label] || 'linear-gradient(135deg, #e0e0e0, #bdbdbd)'
+  const baseGradient = visitarCategoryGradients[categoryData.label] || municipalGradients.ocean
   const subGradient = visitarSubcategoryGradients[currentLabel as string]
   const gradient = subGradient || baseGradient
 
@@ -133,7 +134,7 @@ export default function VisitarDetalle() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #3AABB5 0%, #0A4D4C 50%, #7B4C9E 100%)',
+          background: municipalGradients.principal,
           overflow: 'hidden',
         }}
       >
@@ -508,8 +509,8 @@ export default function VisitarDetalle() {
                                 label="Ver en Google Maps"
                                 size="small"
                                 sx={{
-                                  backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                                  color: '#1976d2',
+                                  backgroundColor: 'var(--color-primary)1A',
+                                  color: 'var(--color-primary)',
                                   cursor: 'pointer',
                                 }}
                               />
@@ -662,8 +663,8 @@ export default function VisitarDetalle() {
                                 label="Ver en Google Maps"
                                 size="small"
                                 sx={{
-                                  backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                                  color: '#1976d2',
+                                  backgroundColor: 'var(--color-primary)1A',
+                                  color: 'var(--color-primary)',
                                   cursor: 'pointer',
                                 }}
                               />
@@ -679,6 +680,8 @@ export default function VisitarDetalle() {
           </motion.div>
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   AppBar,
   Toolbar,
@@ -29,11 +29,6 @@ import { topMenuItems, drawerMenuSections, type MenuItem as NavItem, type TopMen
 import { SPRING_STANDARD, SPRING_GENTLE } from '../../config/animations'
 
 const BANNER_STORAGE_KEY = 'bannerDismissed'
-
-const DROPDOWN_BG = '#1A4D5C'
-const DROPDOWN_TEXT = '#F8F5F3'
-const DROPDOWN_HOVER = 'rgba(58, 171, 181, 0.1)'
-const DROPDOWN_BORDER = '#E29578'
 
 const isExternalLink = (href: string): boolean => {
   return href.startsWith('http://') || href.startsWith('https://')
@@ -122,17 +117,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
   )
 }
 
-function DropdownItem({
-  item,
-  depth,
-  handleClose,
-}: {
-  item: NavItem
-  depth: number
-  handleClose: () => void
-}) {
-  const [expanded, setExpanded] = useState(false)
-
+function MegaMenuCard({ item, handleClose, index }: { item: NavItem; handleClose: () => void; index: number }) {
   if (!item.children || item.children.length === 0) {
     return (
       <Box
@@ -142,14 +127,16 @@ function DropdownItem({
         {...getLinkProps(item.href || '#')}
         onClick={handleClose}
         sx={{
-          pl: 2 + depth,
+          pl: 1.5,
           py: 0.75,
           display: 'block',
-          color: DROPDOWN_TEXT,
+          color: 'var(--color-text-primary)',
+          fontWeight: 500,
           '&:hover': {
-            backgroundColor: DROPDOWN_HOVER,
+            backgroundColor: 'var(--color-primary)1A',
+            color: 'var(--color-primary)',
           },
-          borderRadius: '4px',
+          borderRadius: '8px',
           margin: '0 4px',
         }}
       >
@@ -159,80 +146,104 @@ function DropdownItem({
   }
 
   return (
-    <Box key={item.label} sx={{ width: '100%', mb: 1 }}>
-      <Box
-        onClick={() => setExpanded(!expanded)}
+    <motion.div
+      key={item.label}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, delay: index * 0.03 }}
+    >
+      <Typography
+        variant="subtitle1"
         sx={{
-          pl: 2 + depth,
-          py: 0.75,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          cursor: 'pointer',
-          color: DROPDOWN_TEXT,
-          '&:hover': {
-            backgroundColor: DROPDOWN_HOVER,
-          },
-          borderRadius: '4px',
-          margin: '0 4px',
+          fontWeight: 700,
+          color: 'var(--color-text-secondary)',
+          pl: 1.5,
+          py: 1,
+          mb: 0.5,
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
         }}
       >
-        <Typography variant="subtitle1" sx={{ fontWeight: 600, color: DROPDOWN_TEXT }}>
-          {item.label}
-        </Typography>
-        <ExpandMore
-          sx={{
-            fontSize: 18,
-            transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.2s',
-            color: DROPDOWN_TEXT,
-          }}
-        />
-      </Box>
-      <AnimatePresence>
-        {expanded && (
+        {item.label}
+      </Typography>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+          gap: 1,
+          pl: 1,
+          pr: 2,
+          pb: 1.5,
+        }}
+      >
+        {item.children.map((child, childIndex) => (
           <motion.div
-            initial={{ opacity: 0, maxHeight: 0, overflow: 'hidden' }}
-            animate={{ opacity: 1, maxHeight: '2000px', overflow: 'hidden' }}
-            exit={{ opacity: 0, maxHeight: 0, overflow: 'hidden' }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{ width: '100%' }}
+            key={child.label}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, delay: childIndex * 0.02 }}
           >
             <Box
+              component="a"
+              href={child.href || '#'}
+              {...getLinkProps(child.href || '#')}
+              onClick={handleClose}
               sx={{
-                display: 'grid',
-                gridTemplateColumns: {
-                  xs: '1fr 1fr',
-                  sm: 'repeat(2, 1fr)',
-                  md: 'repeat(3, 1fr)',
+                p: 1.5,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 0.5,
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '12px',
+                cursor: 'pointer',
+                textDecoration: 'none',
+                color: 'var(--color-text-primary)',
+                transition: 'all 0.2s cubic-bezier(0.23, 1, 0.32, 1)',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: 'var(--shadow-md)',
+                  borderColor: 'var(--color-primary)',
+                  backgroundColor: 'var(--color-surface)',
                 },
-                gap: 1,
-                pl: 2 + depth,
-                pr: 2,
-                pb: 1,
               }}
             >
-              {item.children.map((child) => (
-                <DropdownItem
-                  key={child.label}
-                  item={child}
-                  depth={depth + 1}
-                  handleClose={handleClose}
-                />
-              ))}
+              <Typography
+                variant="body1"
+                sx={{
+                  fontWeight: 600,
+                  fontSize: '0.95rem',
+                  color: 'var(--color-text-primary)',
+                }}
+              >
+                {child.label}
+              </Typography>
+              {child.description && (
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: 'var(--color-text-secondary)',
+                    fontSize: '0.8rem',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {child.description}
+                </Typography>
+              )}
             </Box>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </Box>
+        ))}
+      </Box>
+    </motion.div>
   )
 }
 
-function renderDropdownChildren(items: NavItem[], depth = 0, handleClose: () => void) {
+function renderMegaMenuChildren(items: NavItem[], handleClose: () => void) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5, p: 1 }}>
-      {items.map((item) => (
-        <DropdownItem key={item.label} item={item} depth={depth} handleClose={handleClose} />
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, p: 2 }}>
+      {items.map((item, index) => (
+        <MegaMenuCard key={item.label} item={item} handleClose={handleClose} index={index} />
       ))}
     </Box>
   )
@@ -262,11 +273,11 @@ function DesktopMenuButton({
     return (
       <motion.div variants={menuItemVariants}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="Temperatura actual">
-              <motion.div
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: 'spring', damping: 25, stiffness: 400 }}
-              >
+          <Tooltip title="Temperatura actual">
+            <motion.div
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 400 }}
+            >
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1 }}>
                 <WeatherSunny sx={{ fontSize: 20, color: '#ffeb3b' }} />
                 <Cloud sx={{ fontSize: 20, color: '#90caf9' }} />
@@ -302,7 +313,10 @@ function DesktopMenuButton({
           fontWeight: 500,
           fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' },
           backgroundColor: isOpen ? 'rgba(255,255,255,0.1)' : 'transparent',
-          borderRadius: '4px',
+          borderRadius: '8px',
+          py: 1,
+          px: 1.5,
+          transition: 'background-color 0.2s',
         }}
       >
         {item.label}
@@ -313,37 +327,40 @@ function DesktopMenuButton({
         onClose={handleClose}
         MenuListProps={{
           sx: {
-            bgcolor: DROPDOWN_BG,
-            color: DROPDOWN_TEXT,
+            bgcolor: 'transparent',
+            color: 'var(--color-text-primary)',
             width: '100vw',
             maxWidth: '100vw',
             maxHeight: 'calc(100vh - 120px)',
             overflowY: 'auto',
             py: 2,
+            pt: 0,
           },
         }}
         PaperProps={{
-            sx: {
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              maxWidth: '100vw',
-              bgcolor: DROPDOWN_BG,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-              borderBottom: `1px solid ${DROPDOWN_BORDER}`,
-              zIndex: 10000,
-            },
-          }}
+          sx: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            maxWidth: '100vw',
+            bgcolor: 'var(--color-background)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+            borderBottom: '1px solid var(--color-border)',
+            zIndex: 10000,
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          },
+        }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
         BackdropProps={{
           sx: {
-            backgroundColor: 'rgba(0,0,0,0.4)',
+            backgroundColor: 'rgba(0,0,0,0.3)',
           },
         }}
       >
-        {renderDropdownChildren(item.children, 0, handleClose)}
+        {renderMegaMenuChildren(item.children, handleClose)}
       </Menu>
     </>
   )

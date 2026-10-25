@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header/Header'
 import Home from './pages/Home'
@@ -7,8 +8,20 @@ import HacerDetalle from './pages/HacerDetalle'
 import Visitar from './pages/Visitar'
 import VisitarDetalle from './pages/VisitarDetalle'
 import Informacion from './pages/Informacion'
+import { cssVariables } from './config/theme'
 
 function App() {
+  useEffect(() => {
+    const style = document.createElement('style')
+    style.id = 'municipal-css-variables'
+    style.textContent = cssVariables
+    document.head.appendChild(style)
+    return () => {
+      const el = document.getElementById('municipal-css-variables')
+      if (el) el.remove()
+    }
+  }, [])
+
   return (
     <BrowserRouter>
       <Header />
@@ -26,8 +39,8 @@ function App() {
            <Route path="/informacion" element={<Informacion />} />
            <Route path="/informacion/:page" element={<Informacion />} />
          </Routes>
-      </div>
-    </BrowserRouter>
+       </div>
+     </BrowserRouter>
   )
 }
 

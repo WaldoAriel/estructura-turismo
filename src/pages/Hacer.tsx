@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import { introText, hacerCategories, hacerCategoryGradients } from '../data/hacerData'
 import { SPRING_STANDARD, STAGGER_FAST, FADE_UP_CHILD } from '../config/animations'
+import { municipalGradients, municipalPalette } from '../config/theme'
+import Footer from '../components/Footer'
 
 export default function Hacer() {
   return (
@@ -13,7 +15,7 @@ export default function Hacer() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #7B4C9E 0%, #9A6EDC 50%, #3AABB5 100%)',
+          background: municipalGradients.secundario,
           overflow: 'hidden',
         }}
       >
@@ -46,7 +48,7 @@ export default function Hacer() {
               }}
             >
               Qué Hacer
-              <Box component="span" sx={{ display: 'block', color: '#E29578' }}>
+              <Box component="span" sx={{ display: 'block', color: municipalPalette.limeGreen }}>
                 en Santa Rosa
               </Box>
             </Typography>
@@ -80,7 +82,7 @@ export default function Hacer() {
             variants={STAGGER_FAST}
           >
             {hacerCategories.map((category, index) => {
-              const categoryGradient = hacerCategoryGradients[category.label] || 'linear-gradient(135deg, #e0e0e0, #bdbdbd)'
+              const categoryGradient = hacerCategoryGradients[category.label] || municipalGradients.ocean
               const itemCount = category.items?.length || 0
               const isEven = index % 2 === 0
 
@@ -220,6 +222,8 @@ export default function Hacer() {
           </motion.div>
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

@@ -3,7 +3,9 @@ import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { infoPages, sobreSantaRosaContent, contactInfo, usefulPhones, distancesFromSantaRosa, distancesToNearby, travelGuides, travelAgencies, busInfo, flightInfo, faqs } from '../data/infoData'
 import { SPRING_STANDARD, STAGGER_FAST } from '../config/animations'
+import { municipalGradients } from '../config/theme'
 import Gallery from '../components/Gallery'
+import Footer from '../components/Footer'
 
 const pageImages: Record<string, string[]> = {
   'sobre-santa-rosa': ['/images/placeholder/santarosa.svg', '/images/placeholder/santarosa.svg', '/images/placeholder/santarosa.svg'],
@@ -40,7 +42,7 @@ export default function Informacion() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #3AABB5 0%, #0A4D4C 50%, #7B4C9E 100%)',
+          background: municipalGradients.principal,
           overflow: 'hidden',
         }}
       >
@@ -111,7 +113,7 @@ export default function Informacion() {
               <motion.div initial="hidden" animate="visible" variants={STAGGER_FAST}>
                 <Box sx={{ display: 'grid', gap: 4, gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' } }}>
                   <Card sx={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--color-border)', borderRadius: 'var(--border-radius-lg)', overflow: 'hidden' }}>
-                    <Box sx={{ height: 200, width: '100%', background: 'linear-gradient(135deg, #a5d6a7, #388e3c)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Box sx={{ height: 200, width: '100%', background: municipalGradients.naturaleza, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Typography variant="h5" sx={{ color: '#FFFFFF', fontFamily: 'var(--font-display)', fontWeight: 700 }}>{sobreSantaRosaContent.citySection.title}</Typography>
                     </Box>
                     <CardContent sx={{ p: 3 }}>
@@ -121,7 +123,7 @@ export default function Informacion() {
                     </CardContent>
                   </Card>
                   <Card sx={{ boxShadow: 'var(--shadow-md)', border: '1px solid var(--color-border)', borderRadius: 'var(--border-radius-lg)', overflow: 'hidden' }}>
-                    <Box sx={{ height: 200, width: '100%', background: 'linear-gradient(135deg, #ffcc80, #ef6c00)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Box sx={{ height: 200, width: '100%', background: municipalGradients.sunset, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Typography variant="h5" sx={{ color: '#FFFFFF', fontFamily: 'var(--font-display)', fontWeight: 700 }}>{sobreSantaRosaContent.historySection.title}</Typography>
                     </Box>
                     <CardContent sx={{ p: 3 }}>
@@ -319,6 +321,8 @@ export default function Informacion() {
           )}
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

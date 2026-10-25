@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { hacerCategories, hacerCategoryGradients, type HacerItem } from '../data/hacerData'
 import { SPRING_STANDARD, STAGGER_FAST, FADE_UP_CHILD } from '../config/animations'
-import { municipalPalette } from '../config/theme'
+import { municipalGradients, municipalPalette } from '../config/theme'
+import Footer from '../components/Footer'
 
 export default function HacerDetalle() {
   const { category } = useParams<{ category: string }>()
@@ -20,7 +21,7 @@ export default function HacerDetalle() {
     )
   }
 
-  const gradient = hacerCategoryGradients[categoryData.label] || 'linear-gradient(135deg, #e0e0e0, #bdbdbd)'
+  const gradient = hacerCategoryGradients[categoryData.label] || municipalGradients.ocean
   const items: HacerItem[] = categoryData.items
 
   return (
@@ -31,7 +32,7 @@ export default function HacerDetalle() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #7B4C9E 0%, #9A6EDC 50%, #3AABB5 100%)',
+          background: municipalGradients.secundario,
           overflow: 'hidden',
         }}
       >
@@ -279,8 +280,8 @@ export default function HacerDetalle() {
                                 label="Ver en Google Maps"
                                 size="small"
                                 sx={{
-                                  backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                                  color: '#1976d2',
+                                  backgroundColor: 'var(--color-primary)1A',
+                                  color: 'var(--color-primary)',
                                   cursor: 'pointer',
                                 }}
                               />
@@ -296,6 +297,8 @@ export default function HacerDetalle() {
           </motion.div>
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

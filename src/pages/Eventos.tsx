@@ -2,13 +2,15 @@ import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Chip 
 import { motion } from 'framer-motion'
 import { introText, autumnIntroText, winterIntroText, springIntroText, summerEvents, autumnEvents, winterEvents, springEvents, getEventPlaceholder } from '../data/eventosData'
 import { SPRING_STANDARD, STAGGER_FAST } from '../config/animations'
+import { municipalGradients } from '../config/theme'
 import Gallery from '../components/Gallery'
+import Footer from '../components/Footer'
 
 const seasonConfig: Record<string, { gradient: string; intro: string; heroGradient: string }> = {
-  Verano: { gradient: 'linear-gradient(135deg, #fff9c4, #ffeb3b)', intro: '', heroGradient: 'linear-gradient(135deg, #3AABB5 0%, #E29578 100%)' },
-  Otoño: { gradient: 'linear-gradient(135deg, #ffe082, #ff9800)', intro: autumnIntroText, heroGradient: 'linear-gradient(135deg, #E29578 0%, #7B4C9E 100%)' },
-  Invierno: { gradient: 'linear-gradient(135deg, #bbdefb, #2196f3)', intro: winterIntroText, heroGradient: 'linear-gradient(135deg, #0A4D4C 0%, #3AABB5 100%)' },
-  Primavera: { gradient: 'linear-gradient(135deg, #c8e6c9, #4caf50)', intro: springIntroText, heroGradient: 'linear-gradient(135deg, #9A6EDC 0%, #E29578 100%)' },
+  Verano: { gradient: 'linear-gradient(135deg, #F89C32, #F37335)', intro: '', heroGradient: municipalGradients.turquesa },
+  Otoño: { gradient: 'linear-gradient(135deg, #F89C32, #F37335)', intro: autumnIntroText, heroGradient: municipalGradients.sunset },
+  Invierno: { gradient: 'linear-gradient(135deg, #3AABB5, #0E98AE)', intro: winterIntroText, heroGradient: municipalGradients.principal },
+  Primavera: { gradient: 'linear-gradient(135deg, #92C14A, #B9CF41)', intro: springIntroText, heroGradient: municipalGradients.forest },
 }
 
 const seasonOrder = ['Verano', 'Otoño', 'Invierno', 'Primavera']
@@ -138,11 +140,11 @@ function SeasonSection({
                 label={`${events.length} eventos`}
                 size="small"
                 sx={{
-                  backgroundColor: 'rgba(58, 171, 181, 0.1)',
+                  backgroundColor: 'var(--color-primary)1A',
                   color: 'var(--color-primary-dark)',
                   fontWeight: 600,
                   fontSize: '0.75rem',
-                  border: '1px solid rgba(58, 171, 181, 0.3)',
+                  border: '1px solid var(--color-primary)33',
                 }}
               />
             </Box>
@@ -180,7 +182,7 @@ function SeasonSection({
                     sx={{
                       mb: 1,
                       alignSelf: 'flex-start',
-                      backgroundColor: 'rgba(58, 171, 181, 0.1)',
+                      backgroundColor: 'var(--color-primary)1A',
                       color: 'var(--color-primary-dark)',
                       fontWeight: 600,
                       fontSize: '0.75rem',
@@ -220,7 +222,7 @@ export default function Eventos() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #3AABB5 0%, #0A4D4C 50%, #7B4C9E 100%)',
+          background: municipalGradients.principal,
           overflow: 'hidden',
         }}
       >
@@ -294,6 +296,8 @@ export default function Eventos() {
           ))}
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

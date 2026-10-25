@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import { visitarCategories, visitarCategoryGradients } from '../data/hacerData'
 import { SPRING_STANDARD, STAGGER_FAST, FADE_UP_CHILD } from '../config/animations'
+import { municipalGradients } from '../config/theme'
+import Footer from '../components/Footer'
 
 const introText =
   'Santa Rosa de Calamuchita combina la imponente belleza natural de las sierras y el río Santa Rosa con un rico legado histórico, arquitectura única y una vibrante oferta cultural. Desde aventuras en la montaña hasta experiencias artísticas y gastronómicas, descubrí por qué nuestra ciudad es uno de los destinos más atractivos de la provincia de Córdoba.'
@@ -16,7 +18,7 @@ export default function Visitar() {
           pt: { xs: 14, sm: 16, md: 18 },
           pb: { xs: 12, md: 18 },
           mb: { xs: 4, md: 6 },
-          background: 'linear-gradient(135deg, #3AABB5 0%, #0A4D4C 50%, #7B4C9E 100%)',
+          background: municipalGradients.principal,
           overflow: 'hidden',
         }}
       >
@@ -123,7 +125,7 @@ export default function Visitar() {
             variants={STAGGER_FAST}
           >
             {visitarCategories.map((category, index) => {
-              const categoryGradient = visitarCategoryGradients[category.label] || 'linear-gradient(135deg, #e0e0e0, #bdbdbd)'
+              const categoryGradient = visitarCategoryGradients[category.label] || municipalGradients.ocean
               const itemCount = category.subcategories?.length || category.items?.length || 0
               const isEven = index % 2 === 0
 
@@ -281,6 +283,8 @@ export default function Visitar() {
           </motion.div>
         </Container>
       </section>
+
+      <Footer />
     </>
   )
 }

@@ -698,10 +698,10 @@ export const hacerCategories: HacerCategory[] = [
 ]
 
 export const hacerCategoryGradients: Record<string, string> = {
-  Cicloturismo: 'linear-gradient(135deg, #90caf9, #0288d1)',
-  Cabalgatas: 'linear-gradient(135deg, #a5d6a7, #388e3c)',
-  Senderismo: 'linear-gradient(135deg, #c8e6c9, #4caf50)',
-  'Nuestra Historia': 'linear-gradient(135deg, #fff59d, #fbc02d)',
+  Cicloturismo: 'linear-gradient(135deg, #3AABB5, #0E98AE)',
+  Cabalgatas: 'linear-gradient(135deg, #92C14A, #B9CF41)',
+  Senderismo: 'linear-gradient(135deg, #0E98AE, #3AABB5)',
+  'Nuestra Historia': 'linear-gradient(135deg, #F89C32, #F37335)',
 }
 
 export interface VisitSubcategory {
@@ -768,16 +768,16 @@ export const visitarCategories: VisitCategory[] = [
 ]
 
 export const visitarCategoryGradients: Record<string, string> = {
-  'Descubrí la Naturaleza': 'linear-gradient(135deg, #c8e6c9, #4caf50)',
-  'Cultura y Entretenimiento': 'linear-gradient(135deg, #f8bbd0, #e91e63)',
-  'Paseos / Lugares de Interés': 'linear-gradient(135deg, #a5d6a7, #388e3c)',
+  'Descubrí la Naturaleza': 'linear-gradient(135deg, #92C14A, #B9CF41)',
+  'Cultura y Entretenimiento': 'linear-gradient(135deg, #F37335, #F89C32)',
+  'Paseos / Lugares de Interés': 'linear-gradient(135deg, #0E98AE, #3AABB5)',
 }
 
 export const visitarSubcategoryGradients: Record<string, string> = {
-  'Atractivos Culturales': 'linear-gradient(135deg, #e1bee7, #7b1fa2)',
-  Esparcimiento: 'linear-gradient(135deg, #b39ddb, #9c27b0)',
-  Artesanos: 'linear-gradient(135deg, #ffe0b2, #ff9800)',
-  'Camino del Productor': 'linear-gradient(135deg, #ffe0b2, #f57c00)',
+  'Atractivos Culturales': 'linear-gradient(135deg, #F37335, #E29578)',
+  Esparcimiento: 'linear-gradient(135deg, #3AABB5, #0E98AE)',
+  Artesanos: 'linear-gradient(135deg, #F89C32, #B9CF41)',
+  'Camino del Productor': 'linear-gradient(135deg, #F89C32, #F37335)',
 }
 
 export const seasonData = [
