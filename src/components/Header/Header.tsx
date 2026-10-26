@@ -193,127 +193,235 @@ function MegaMenuCard({ item, handleClose, index }: { item: NavItem; handleClose
           {item.label}
         </Typography>
       )}
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.25, pl: 1.5, pr: 1.5, pb: 0.5, width: '100%' }}>
-        {item.children.map((child, childIndex) => (
-          <Box key={child.label} sx={{ mb: 0.25, width: '100%' }}>
-            {child.children && child.children.length > 0 ? (
-              <Box>
-                <Typography
-                  variant="caption"
-                  sx={{
-                    fontWeight: 700,
-                    color: 'var(--color-text-secondary)',
-                    pl: 0,
-                    py: 0.5,
-                    fontSize: '0.7rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  {child.label}
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(2, 1fr)',
-                    gap: 0.5,
-                    pb: 0.5,
-                    width: '100%',
-                  }}
-                >
-                  {child.children!.map((grandChild, grandChildIndex) => (
-                    <motion.div
-                      key={grandChild.label}
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.15, delay: grandChildIndex * 0.015 }}
+      {item.children.some(c => c.children && c.children.length > 0) ? (
+        <Box sx={{ width: '100%', pl: 1.5, pr: 1.5, pb: 0.5 }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: 1,
+              width: '100%',
+            }}
+          >
+            {item.children
+              .filter(c => c.children && c.children.length > 0)
+              .map((child) => (
+                <Box key={child.label} sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                  {child.href ? (
+                    <Box
+                      component="a"
+                      href={child.href}
+                      {...getLinkProps(child.href)}
+                      onClick={handleClose}
+                      sx={{
+                        py: 0.5,
+                        fontWeight: 700,
+                        color: 'var(--color-text-secondary)',
+                        fontSize: '0.7rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        textDecoration: 'none',
+                        '&:hover': { color: 'var(--color-primary)' },
+                      }}
                     >
-                      <Box
-                        component="a"
-                        href={grandChild.href || '#'}
-                        {...getLinkProps(grandChild.href || '#')}
-                        onClick={handleClose}
-                        sx={{
-                          p: 0.75,
-                          display: 'block',
-                          backgroundColor: 'transparent',
-                          border: 'none',
-                          borderRadius: '8px',
-                          cursor: 'pointer',
-                          textDecoration: 'none',
-                          color: 'var(--color-text-primary)',
-                          transition: 'all 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
-                          '&:hover': {
-                            backgroundColor: 'var(--color-primary)12',
-                            color: 'var(--color-primary)',
-                          },
-                        }}
+                      {child.label}
+                    </Box>
+                  ) : (
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        fontWeight: 700,
+                        color: 'var(--color-text-secondary)',
+                        py: 0.5,
+                        fontSize: '0.7rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                      }}
+                    >
+                      {child.label}
+                    </Typography>
+                  )}
+                  <Box
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(2, 1fr)',
+                      gap: 0.5,
+                      pb: 0.5,
+                      width: '100%',
+                    }}
+                  >
+                    {child.children!.map((grandChild, grandChildIndex) => (
+                      <motion.div
+                        key={grandChild.label}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.15, delay: grandChildIndex * 0.015 }}
                       >
-                        <Typography
-                          variant="body2"
+                        <Box
+                          component="a"
+                          href={grandChild.href || '#'}
+                          {...getLinkProps(grandChild.href || '#')}
+                          onClick={handleClose}
                           sx={{
-                            fontWeight: 500,
-                            fontSize: '0.875rem',
+                            p: 0.75,
+                            display: 'block',
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            textDecoration: 'none',
                             color: 'var(--color-text-primary)',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
+                            transition: 'all 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
+                            '&:hover': {
+                              backgroundColor: 'var(--color-primary)12',
+                              color: 'var(--color-primary)',
+                            },
                           }}
                         >
-                          {grandChild.label}
-                        </Typography>
-                      </Box>
-                    </motion.div>
-                  ))}
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontWeight: 500,
+                              fontSize: '0.875rem',
+                              color: 'var(--color-text-primary)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            {grandChild.label}
+                          </Typography>
+                        </Box>
+                      </motion.div>
+                    ))}
+                  </Box>
                 </Box>
-              </Box>
-            ) : (
-              <motion.div
-                key={child.label}
-                initial={{ opacity: 0, y: 4 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.15, delay: childIndex * 0.015 }}
-              >
-                <Box
-                  component="a"
-                  href={child.href || '#'}
-                  {...getLinkProps(child.href || '#')}
-                  onClick={handleClose}
-                  sx={{
-                    p: 0.75,
-                    display: 'block',
-                    backgroundColor: 'transparent',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    color: 'var(--color-text-primary)',
-                    transition: 'all 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
-                    '&:hover': {
-                      backgroundColor: 'var(--color-primary)12',
-                      color: 'var(--color-primary)',
-                    },
-                  }}
-                >
+              ))}
+          </Box>
+        </Box>
+      ) : (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.25, pl: 1.5, pr: 1.5, pb: 0.5, width: '100%' }}>
+          {item.children.map((child, childIndex) => (
+            <Box key={child.label} sx={{ mb: 0.25, width: '100%' }}>
+              {child.children && child.children.length > 0 ? (
+                <Box>
                   <Typography
-                    variant="body2"
+                    variant="caption"
                     sx={{
-                      fontWeight: 500,
-                      fontSize: '0.875rem',
-                      color: 'var(--color-text-primary)',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
+                      fontWeight: 700,
+                      color: 'var(--color-text-secondary)',
+                      pl: 0,
+                      py: 0.5,
+                      fontSize: '0.7rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
                     }}
                   >
                     {child.label}
                   </Typography>
+                  <Box
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(2, 1fr)',
+                      gap: 0.5,
+                      pb: 0.5,
+                      width: '100%',
+                    }}
+                  >
+                    {child.children!.map((grandChild, grandChildIndex) => (
+                      <motion.div
+                        key={grandChild.label}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.15, delay: grandChildIndex * 0.015 }}
+                      >
+                        <Box
+                          component="a"
+                          href={grandChild.href || '#'}
+                          {...getLinkProps(grandChild.href || '#')}
+                          onClick={handleClose}
+                          sx={{
+                            p: 0.75,
+                            display: 'block',
+                            backgroundColor: 'transparent',
+                            border: 'none',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            textDecoration: 'none',
+                            color: 'var(--color-text-primary)',
+                            transition: 'all 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
+                            '&:hover': {
+                              backgroundColor: 'var(--color-primary)12',
+                              color: 'var(--color-primary)',
+                            },
+                          }}
+                        >
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontWeight: 500,
+                              fontSize: '0.875rem',
+                              color: 'var(--color-text-primary)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                            }}
+                          >
+                            {grandChild.label}
+                          </Typography>
+                        </Box>
+                      </motion.div>
+                    ))}
+                  </Box>
                 </Box>
-              </motion.div>
-            )}
-          </Box>
-        ))}
-      </Box>
+              ) : (
+                <motion.div
+                  key={child.label}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.15, delay: childIndex * 0.015 }}
+                >
+                  <Box
+                    component="a"
+                    href={child.href || '#'}
+                    {...getLinkProps(child.href || '#')}
+                    onClick={handleClose}
+                    sx={{
+                      p: 0.75,
+                      display: 'block',
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      textDecoration: 'none',
+                      color: 'var(--color-text-primary)',
+                      transition: 'all 0.15s cubic-bezier(0.23, 1, 0.32, 1)',
+                      '&:hover': {
+                        backgroundColor: 'var(--color-primary)12',
+                        color: 'var(--color-primary)',
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 500,
+                        fontSize: '0.875rem',
+                        color: 'var(--color-text-primary)',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {child.label}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              )}
+            </Box>
+          ))}
+        </Box>
+      )}
     </motion.div>
   )
 }
