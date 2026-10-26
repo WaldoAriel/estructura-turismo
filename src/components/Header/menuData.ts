@@ -51,12 +51,13 @@ export const drawerMenuSections: MenuItem[][] = [
     },
   ],
   [
-    {
-      label: 'Qué Visitar',
-      children: [
-         {
-          label: 'Descubrí la naturaleza',
-          children: [
+{
+              label: 'Qué Visitar',
+              children: [
+                {
+                  label: 'Descubrí la naturaleza',
+                  href: '/visitar/naturaleza',
+                  children: [
             { label: 'Cerro Vía Crucis', href: '/visitar/naturaleza/cerro-via-crucis' },
             { label: 'Reserva Natural La Cascada', href: '/visitar/naturaleza/reserva-natural-la-cascada' },
             { label: 'Desafío Aguarayba', href: '/visitar/naturaleza/desafio-aguarayba' },
@@ -64,9 +65,10 @@ export const drawerMenuSections: MenuItem[][] = [
             { label: 'Costanera y Balnearios', href: '/visitar/naturaleza/costanera-y-balnearios' },
           ],
         },
-        {
-          label: 'Cultura y Entretenimiento',
-          children: [
+{
+              label: 'Cultura y Entretenimiento',
+              href: '/visitar/cultura',
+              children: [
           {
            label: 'Atractivos Culturales',
            href: '/visitar/cultura/atractivos-culturales',
@@ -85,9 +87,10 @@ export const drawerMenuSections: MenuItem[][] = [
          },
           ],
         },
-         {
-          label: 'Paseos / Lugares de Interés',
-          children: [
+{
+              label: 'Paseos / Lugares de Interés',
+              href: '/visitar/paseos',
+              children: [
             { label: 'Complejo La Estancia', href: '/visitar/paseos/complejo-la-estancia' },
             { label: 'Plazoleta del Tercer Milenio', href: '/visitar/paseos/plazoleta-del-tercer-milenio' },
             { label: 'Monumento a la Madre', href: '/visitar/paseos/monumento-a-la-madre' },
