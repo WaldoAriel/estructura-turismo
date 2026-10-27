@@ -5,6 +5,11 @@ import SearchIcon from '@mui/icons-material/Search'
 import { Link as RouterLink } from 'react-router-dom'
 import { municipalPalette } from '../config/theme'
 
+// Normalize string: remove accents/diacritics for accent-insensitive search
+function normalizeString(str: string): string {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
 export interface SearchItem {
   id: string
   title: string
@@ -32,11 +37,11 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
       return
     }
 
-    const q = query.toLowerCase().trim()
+    const q = normalizeString(query.toLowerCase().trim())
     const filtered = items.filter(
       (item) =>
-        item.title.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q)
+        normalizeString(item.title.toLowerCase()).includes(q) ||
+        normalizeString(item.description.toLowerCase()).includes(q)
     )
 
     setResults(filtered.slice(0, 8))
