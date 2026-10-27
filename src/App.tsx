@@ -8,6 +8,8 @@ import HacerDetalle from './pages/HacerDetalle'
 import Visitar from './pages/Visitar'
 import VisitarDetalle from './pages/VisitarDetalle'
 import Informacion from './pages/Informacion'
+import Alojamientos from './pages/Alojamientos'
+import Gastronomia from './pages/Gastronomia'
 import { cssVariables } from './config/theme'
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
            <Route path="/visitar/:category/:subcategory/:item" element={<VisitarDetalle />} />
            <Route path="/informacion" element={<Informacion />} />
            <Route path="/informacion/:page" element={<Informacion />} />
+           <Route path="/alojamientos" element={<Alojamientos />} />
+           <Route path="/gastronomia" element={<Gastronomia />} />
          </Routes>
        </div>
      </BrowserRouter>

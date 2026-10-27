@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Box, TextField, InputAdornment, List, ListItem, ListItemText, Typography, Paper, ClickAwayListener } from '@mui/material'
+import { Box, TextField, InputAdornment, List, ListItem, ListItemText, Typography, Paper, ClickAwayListener, Chip } from '@mui/material'
 import { motion, AnimatePresence } from 'framer-motion'
 import SearchIcon from '@mui/icons-material/Search'
 import { Link as RouterLink } from 'react-router-dom'
@@ -14,9 +14,11 @@ export interface SearchItem {
   id: string
   title: string
   description: string
-  type: 'hacer' | 'evento' | 'informacion'
+  type: 'hacer' | 'evento' | 'informacion' | 'alojamiento' | 'gastronomia'
   url: string
   category?: string
+  external?: boolean
+  source?: 'principal' | 'alojamientos' | 'gastronomia'
 }
 
 export interface SearchBarProps {
@@ -59,12 +61,16 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
     hacer: 'Qué Hacer',
     evento: 'Eventos',
     informacion: 'Información',
+    alojamiento: 'Alojamientos',
+    gastronomia: 'Gastronomía',
   }
 
   const typeColors: Record<string, string> = {
     hacer: municipalPalette.turquoise,
     evento: municipalPalette.orange,
     informacion: municipalPalette.teal,
+    alojamiento: municipalPalette.amber,
+    gastronomia: municipalPalette.orange,
   }
 
   const grouped = results.reduce<Record<string, SearchItem[]>>((acc, item) => {
@@ -183,8 +189,10 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
                           {items.map((item) => (
                             <ListItem
                               key={item.id}
-                              component={RouterLink}
+                              component={item.external ? 'a' : RouterLink}
                               to={item.url}
+                              target={item.external ? '_blank' : undefined}
+                              rel={item.external ? 'noopener noreferrer' : undefined}
                               sx={{
                                 cursor: 'pointer',
                                 borderRadius: 'var(--border-radius-sm)',
@@ -201,9 +209,24 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
                             >
                               <ListItemText
                                 primary={
-                                  <Typography sx={{ color: '#FFFFFF', fontWeight: 600, fontSize: '0.9rem' }}>
-                                    {item.title}
-                                  </Typography>
+                                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <Typography sx={{ color: '#FFFFFF', fontWeight: 600, fontSize: '0.9rem' }}>
+                                      {item.title}
+                                    </Typography>
+                                    {item.external && (
+                                      <Chip
+                                        size="small"
+                                        label={item.source === 'alojamientos' ? '🏨 Alojamientos' : '🍽️ Gastronomía'}
+                                        variant="outlined"
+                                        sx={{
+                                          fontSize: '0.65rem',
+                                          height: 20,
+                                          borderColor: item.source === 'alojamientos' ? municipalPalette.amber : municipalPalette.orange,
+                                          color: item.source === 'alojamientos' ? municipalPalette.amber : municipalPalette.orange,
+                                        }}
+                                      />
+                                    )}
+                                  </Box>
                                 }
                                 secondary={
                                   <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.8rem', mt: 0.2 }}>

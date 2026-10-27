@@ -17,8 +17,8 @@ export interface MenuCardItem extends MenuItem {
 
 export const topMenuItems: TopMenuItem[] = [
   { label: 'Eventos', href: '/eventos' },
-  { label: 'Dónde Comer', href: 'https://guia-gastronomia.netlify.app' },
-  { label: 'Dónde Dormir', href: 'https://alojamientos-src.netlify.app/' },
+  { label: 'Dónde Comer', href: '/gastronomia' },
+  { label: 'Dónde Dormir', href: '/alojamientos' },
   { label: 'Clima' },
 ]
 
