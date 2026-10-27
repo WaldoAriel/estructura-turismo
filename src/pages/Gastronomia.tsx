@@ -185,7 +185,12 @@ export default function Gastronomia() {
                 }}
               >
                 {pageItems.map((item) => (
-                  <EstablecimientoCard key={item.id} item={item} guideType="gastronomia" />
+                  <EstablecimientoCard
+                    key={item.id}
+                    item={item}
+                    guideType="gastronomia"
+                    categoryColor={gastronomiaCategoryColors[item.categoria] || municipalPalette.turquoise}
+                  />
                 ))}
               </Box>
             </motion.div>

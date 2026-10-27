@@ -194,7 +194,12 @@ export default function Alojamientos() {
                 }}
               >
                 {pageItems.map((item) => (
-                  <EstablecimientoCard key={item.id} item={item} guideType="alojamientos" />
+                  <EstablecimientoCard
+                    key={item.id}
+                    item={item}
+                    guideType="alojamientos"
+                    categoryColor={alojamientoCategoryColors[item.categoria] || municipalPalette.turquoise}
+                  />
                 ))}
               </Box>
             </motion.div>

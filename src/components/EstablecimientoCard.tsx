@@ -17,11 +17,13 @@ export interface Establecimiento {
 interface Props {
   item: Establecimiento
   guideType: 'alojamientos' | 'gastronomia'
+  categoryColor?: string
 }
 
-export default function EstablecimientoCard({ item, guideType }: Props) {
+export default function EstablecimientoCard({ item, guideType, categoryColor }: Props) {
   const categoryGradient =
     guideType === 'alojamientos' ? municipalGradients.ocean : municipalGradients.sunset
+  const chipColor = categoryColor || categoryGradient
 
   const whatsappNumber = item.telefonos?.find((t) => t.whatsapp)?.whatsapp || item.telefonos?.[0]?.numero
   const webUrl = item.web && item.web.trim() !== '' ? item.web : null
@@ -29,6 +31,9 @@ export default function EstablecimientoCard({ item, guideType }: Props) {
   const buildWhatsAppMessage = () => {
     const cat = item.categoria.toUpperCase()
     const nombre = item.nombre
+    if (guideType === 'gastronomia') {
+      return `Hola, lo contacto desde el sitio web de Turismo de Santa Rosa de Calamuchita para consultar sobre ${cat} ${nombre}.`
+    }
     return `Hola, lo contacto desde el sitio web de Turismo de Santa Rosa de Calamuchita para consultar disponibilidad en ${cat} ${nombre}.`
   }
 
@@ -66,7 +71,7 @@ export default function EstablecimientoCard({ item, guideType }: Props) {
         <Box
           sx={{
             height: 8,
-            background: categoryGradient,
+            background: chipColor,
             flexShrink: 0,
           }}
         />
@@ -76,7 +81,7 @@ export default function EstablecimientoCard({ item, guideType }: Props) {
               label={item.categoria}
               size="small"
               sx={{
-                backgroundColor: `${categoryGradient}`,
+                backgroundColor: chipColor,
                 color: '#FFFFFF',
                 fontWeight: 600,
                 fontSize: '0.7rem',
