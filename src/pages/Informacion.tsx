@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
+import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { infoPages, sobreSantaRosaContent, contactInfo, usefulPhones, distancesFromSantaRosa, distancesToNearby, travelGuides, travelAgencies, busInfo, flightInfo, faqs } from '../data/infoData'
@@ -61,7 +61,11 @@ export default function Informacion() {
             animate={{ opacity: 1, y: 0 }}
             transition={SPRING_STANDARD}
           >
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3, justifyContent: 'center', '& .MuiBreadcrumbs-separator': { color: 'rgba(255,255,255,0.6)' } }}>
+            <Breadcrumbs
+                aria-label="breadcrumb"
+                separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
+                sx={{ mb: 3, justifyContent: 'center' }}
+              >
               <Link href="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                 Inicio
               </Link>

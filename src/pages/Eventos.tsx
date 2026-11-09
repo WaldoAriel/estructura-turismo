@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Chip } from '@mui/material'
+import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Chip, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
 import { introText, autumnIntroText, winterIntroText, springIntroText, summerEvents, autumnEvents, winterEvents, springEvents, getEventPlaceholder } from '../data/eventosData'
 import { SPRING_STANDARD, STAGGER_FAST } from '../config/animations'
@@ -241,7 +241,11 @@ export default function Eventos() {
             animate={{ opacity: 1, y: 0 }}
             transition={SPRING_STANDARD}
           >
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3, justifyContent: 'center', '& .MuiBreadcrumbs-separator': { color: 'rgba(255,255,255,0.6)' } }}>
+            <Breadcrumbs
+                aria-label="breadcrumb"
+                separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
+                sx={{ mb: 3, justifyContent: 'center' }}
+              >
               <Link href="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>Inicio</Link>
               <Typography sx={{ color: '#FFFFFF', fontSize: '0.85rem', fontWeight: 600 }}>Eventos</Typography>
             </Breadcrumbs>

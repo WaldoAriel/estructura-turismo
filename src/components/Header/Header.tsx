@@ -18,15 +18,14 @@ import {
   AccordionDetails,
   Divider,
   Modal,
-  Tooltip,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import Close from '@mui/icons-material/Close'
-import WeatherSunny from '@mui/icons-material/WbSunny'
-import Cloud from '@mui/icons-material/Cloud'
 import { topMenuItems, drawerMenuSections, type MenuItem as NavItem, type TopMenuItem } from './menuData'
 import { SPRING_STANDARD, SPRING_GENTLE } from '../../config/animations'
+import ClimaWidget from '../ClimaWidget'
+import ClimaModal from '../ClimaModal'
 
 const BANNER_STORAGE_KEY = 'bannerDismissed'
 
@@ -53,11 +52,6 @@ const logoVariants = {
 const hamburgerVariants = {
   hidden: { opacity: 0, x: -10 },
   visible: { opacity: 1, x: 0 },
-}
-
-const menuItemVariants = {
-  hidden: { opacity: 0, y: -8 },
-  visible: { opacity: 1, y: 0 },
 }
 
 const staggerContainer = {
@@ -455,27 +449,6 @@ function DesktopMenuButton({
     }
   }
 
-  // Special handling for Clima widget
-  if (item.label === 'Clima') {
-    return (
-      <motion.div variants={menuItemVariants}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Tooltip title="Temperatura actual">
-            <motion.div
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 400 }}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, p: 1 }}>
-                <WeatherSunny sx={{ fontSize: 20, color: '#ffeb3b' }} />
-                <Cloud sx={{ fontSize: 20, color: '#90caf9' }} />
-              </Box>
-            </motion.div>
-          </Tooltip>
-        </Box>
-      </motion.div>
-    )
-  }
-
   if (!item.children || item.children.length === 0) {
     return (
       <Button
@@ -550,6 +523,7 @@ export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [bannerOpen, setBannerOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [climaModalOpen, setClimaModalOpen] = useState(false)
 
   useEffect(() => {
     if (!localStorage.getItem(BANNER_STORAGE_KEY) && window.location.pathname === '/') {
@@ -664,6 +638,10 @@ export default function Header() {
                 ))}
               </motion.div>
 
+              <Box sx={{ display: 'flex', alignItems: 'center', ml: { xs: 0, sm: 'auto', md: 2 } }}>
+                <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
+              </Box>
+
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -717,7 +695,8 @@ export default function Header() {
             <IconButton
               aria-label="close"
               onClick={handleBannerClose}
-              sx={{ position: 'absolute', top: 8, right: 8, color: 'secondary.contrastText' }}
+              sx={{ position: 'absolute', top: 8, right: 8 }}
+              style={{ color: 'var(--color-text-secondary)' }}
             >
               <Close />
             </IconButton>
@@ -730,6 +709,7 @@ export default function Header() {
           </Box>
         </motion.div>
       </Modal>
+      <ClimaModal open={climaModalOpen} onClose={() => setClimaModalOpen(false)} />
     </>
   )
 }

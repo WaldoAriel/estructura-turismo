@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Chip } from '@mui/material'
+import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Chip, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import {
@@ -153,7 +153,11 @@ export default function VisitarDetalle() {
             animate={{ opacity: 1, y: 0 }}
             transition={SPRING_STANDARD}
           >
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3, justifyContent: 'center', '& .MuiBreadcrumbs-separator': { color: 'rgba(255,255,255,0.6)' } }}>
+            <Breadcrumbs
+                aria-label="breadcrumb"
+                separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
+                sx={{ mb: 3, justifyContent: 'center' }}
+              >
               {breadcrumbs.map((bc, idx) =>
                 bc.href ? (
                   <Link key={idx} href={bc.href} underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>

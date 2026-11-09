@@ -272,19 +272,19 @@ export default function Footer() {
           <Grid item xs={12} md={4}>
             <FooterSection title="Contacto" delay={0.3}>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5, gap: 1, justifyContent: 'center' }}>
-                <LocationIcon sx={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
+                <LocationIcon style={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
                 <Typography variant="body2" sx={{ color: 'rgba(248, 245, 243, 0.8)' }}>
                   Santa Rosa de Calamuchita, Córdoba
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5, gap: 1, justifyContent: 'center' }}>
-                <PhoneIcon sx={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
+                <PhoneIcon style={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
                 <Typography variant="body2" sx={{ color: 'rgba(248, 245, 243, 0.8)' }}>
                   +54 3541 123456
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1.5, gap: 1, justifyContent: 'center' }}>
-                <EmailIcon sx={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
+                <EmailIcon style={{ color: municipalPalette.clay, fontSize: '1.2rem' }} />
                 <Typography variant="body2" sx={{ color: 'rgba(248, 245, 243, 0.8)' }}>
                   info@santarosa.gob.ar
                 </Typography>

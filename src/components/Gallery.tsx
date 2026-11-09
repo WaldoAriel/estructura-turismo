@@ -169,8 +169,8 @@ export default function Gallery({ images, title = 'Galería', fullHeight = false
               position: 'absolute',
               top: -40,
               right: 0,
-              color: 'white',
             }}
+            style={{ color: 'white' }}
           >
             <Box
               component="span"

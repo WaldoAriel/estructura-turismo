@@ -19,7 +19,6 @@ export const topMenuItems: TopMenuItem[] = [
   { label: 'Eventos', href: '/eventos' },
   { label: 'Dónde Comer', href: '/gastronomia' },
   { label: 'Dónde Dormir', href: '/alojamientos' },
-  { label: 'Clima' },
 ]
 
 export const drawerMenuSections: MenuItem[][] = [

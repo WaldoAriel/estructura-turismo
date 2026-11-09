@@ -1,4 +1,4 @@
-import { Box, Typography, Container, Breadcrumbs, Link, Chip } from '@mui/material'
+import { Box, Typography, Container, Breadcrumbs, Link, Chip, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
 import { useParams } from 'react-router-dom'
 import { hacerCategories, hacerCategoryGradients, type HacerItem } from '../data/hacerData'
@@ -51,7 +51,11 @@ export default function HacerDetalle() {
             animate={{ opacity: 1, y: 0 }}
             transition={SPRING_STANDARD}
           >
-            <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 3, justifyContent: 'center', '& .MuiBreadcrumbs-separator': { color: 'rgba(255,255,255,0.6)' } }}>
+            <Breadcrumbs
+                aria-label="breadcrumb"
+                separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
+                sx={{ mb: 3, justifyContent: 'center' }}
+              >
               <Link href="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                 Inicio
               </Link>

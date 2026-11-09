@@ -39,7 +39,8 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
       return
     }
 
-    const q = normalizeString(query.toLowerCase().trim())
+    const q = normalizeString(query.toLowerCase().trim
+    ())
     const filtered = items.filter(
       (item) =>
         normalizeString(item.title.toLowerCase()).includes(q) ||
@@ -124,7 +125,7 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon sx={{ color: 'rgba(255, 255, 255, 0.9)' }} />
+                    <SearchIcon style={{ color: 'rgba(255, 255, 255, 0.9)' }} />
                   </InputAdornment>
                 ),
               }}

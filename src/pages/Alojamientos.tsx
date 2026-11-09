@@ -136,7 +136,7 @@ export default function Alojamientos() {
                       '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderWidth: 2, borderColor: 'var(--color-primary)' },
                     },
                   }}
-                  InputProps={{ startAdornment: <SearchIcon sx={{ color: 'var(--color-text-secondary)', mr: 1 }} /> }}
+                  InputProps={{ startAdornment: <SearchIcon style={{ color: 'var(--color-text-secondary)' }} sx={{ mr: 1 }} /> }}
                 />
                 <Typography variant="body2" color="text.secondary">
                   {filtered.length} {filtered.length === 1 ? 'alojamiento encontrado' : 'alojamientos encontrados'}
