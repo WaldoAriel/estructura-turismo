@@ -84,7 +84,7 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
     <Box sx={{ position: 'relative', width: '100%', maxWidth: 700, mx: 'auto' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 50 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
       >
         <ClickAwayListener onClickAway={() => setIsOpen(false)}>
@@ -99,17 +99,17 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
               onFocus={() => query.trim().length >= 2 && results.length > 0 && setIsOpen(true)}
               sx={{
                 '& .MuiOutlinedInput-root': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.35)',
                   backdropFilter: 'blur(2px) saturate(100%)',
                   WebkitBackdropFilter: 'blur(4px) saturate(180%)',
-                  color: '#FFFFFF',
+                  color: 'rgba(60, 60, 60, 0.7)',
                   borderRadius: '999px',
                   border: 'none',
                   '& fieldset': {
                     border: 'none',
                   },
                   '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
                     border: 'none',
                   },
                   '&.Mui-focused': {
@@ -118,14 +118,14 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
                   },
                 },
                 '& .MuiInputBase-input::placeholder': {
-                  color: 'rgba(255, 255, 255, 0.7)',
+                  color: 'rgba(60, 60, 60, 0.7)',
                   opacity: 1,
                 },
               }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <SearchIcon style={{ color: 'rgba(255, 255, 255, 0.9)' }} />
+                    <SearchIcon style={{ color: 'rgba(60, 60, 60, 0.7)' }} />
                   </InputAdornment>
                 ),
               }}

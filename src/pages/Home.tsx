@@ -3,62 +3,12 @@ import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 import { useState } from 'react'
 import { SPRING_STANDARD, SPRING_GENTLE, STAGGER_FAST } from '../config/animations'
-import { municipalGradients, municipalPalette } from '../config/theme'
+import { municipalGradients } from '../config/theme'
 import SearchBar from '../components/SearchBar'
 import ClimaWidget from '../components/ClimaWidget'
 import ClimaModal from '../components/ClimaModal'
 import { searchIndex } from '../data/searchIndex'
 import Footer from '../components/Footer'
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring' as const,
-      damping: 25,
-      stiffness: 300,
-      delay: i * 0.08,
-    },
-  }),
-}
-
-function AnimatedTitle({ text }: { text: string }) {
-  const words = text.split(' ')
-  const isLast = (i: number) => i === words.length - 1
-  return (
-    <Box
-      component="h1"
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '0.25em',
-        justifyContent: { xs: 'center', md: 'flex-start' },
-        fontFamily: 'var(--font-display)',
-        fontWeight: 800,
-        fontSize: { xs: '2rem', sm: '3rem', md: '3.75rem' },
-        color: '#FFFFFF',
-        letterSpacing: '-0.02em',
-        lineHeight: 1.05,
-        textShadow: '0 2px 12px rgba(0,0,0,0.3)',
-      }}
-    >
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          custom={i}
-          initial="hidden"
-          animate="visible"
-          variants={wordVariants}
-          style={{ display: 'inline-block', color: isLast(i) ? municipalPalette.limeGreen : 'inherit' }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </Box>
-  )
-}
 
 const HighlightCard = ({
   title,
@@ -137,84 +87,6 @@ const HighlightCard = ({
   )
 }
 
-const CategoryTile = ({
-  title,
-  count,
-  gradient,
-  to,
-  delay,
-}: {
-  title: string
-  count: number
-  gradient: string
-  to: string
-  delay: number
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ ...SPRING_GENTLE, delay }}
-    >
-      <Box
-        sx={{
-          position: 'relative',
-          borderRadius: 'var(--border-radius-lg)',
-          overflow: 'hidden',
-          border: '1px solid var(--color-border)',
-          backgroundColor: 'var(--color-surface)',
-          boxShadow: 'var(--shadow-sm)',
-          minHeight: 160,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textDecoration: 'none',
-          transition: 'transform 160ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 160ms cubic-bezier(0.23, 1, 0.32, 1)',
-          '&:hover': {
-            transform: 'translateY(-4px)',
-            boxShadow: 'var(--shadow-md)',
-          },
-        }}
-        component={RouterLink}
-        to={to}
-      >
-        <Box
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            background: gradient,
-            opacity: 0.95,
-          }}
-        />
-        <Box sx={{ position: 'relative', textAlign: 'center', p: 3 }}>
-          <Typography
-            variant="h3"
-            sx={{
-              fontFamily: 'var(--font-display)',
-              fontWeight: 800,
-              color: '#FFFFFF',
-              fontSize: { xs: '2rem', md: '2.5rem' },
-              lineHeight: 1.1,
-              mb: 1,
-            }}
-          >
-            {title}
-          </Typography>
-          <Typography
-            sx={{
-              color: 'rgba(255, 255, 255, 0.9)',
-              fontSize: '0.85rem',
-              fontWeight: 600,
-            }}
-          >
-            {count} {count === 1 ? 'lugar' : 'lugares'}
-          </Typography>
-        </Box>
-      </Box>
-    </motion.div>
-  )
-}
-
 export default function Home() {
   const [climaModalOpen, setClimaModalOpen] = useState(false)
 
@@ -258,6 +130,7 @@ export default function Home() {
               alignItems: 'flex-start',
             }}
           >
+            {/* LEFT COLUMN: Hero SVG + Quote + CTA */}
             <Box
               sx={{
                 display: 'flex',
@@ -266,60 +139,92 @@ export default function Home() {
                 alignItems: { xs: 'center', md: 'flex-start' },
               }}
             >
-              <AnimatedTitle text="Santa Rosa de Calamuchita" />
-              <Typography
-                variant="h6"
-                sx={{
-                  color: 'rgba(248, 245, 243, 0.9)',
-                  maxWidth: 520,
-                  mx: { xs: 'auto', md: 0 },
-                  lineHeight: 1.5,
-                  fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
-                  fontStyle: 'italic',
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...SPRING_STANDARD, delay: 0.1 }}
               >
-                "Hay lugares donde uno se queda y lugares que se quedan en uno"
-              </Typography>
-              <Button
-                variant="contained"
-                component={RouterLink}
-                to="/visitar"
-                sx={{
-                  background: municipalGradients.principal,
-                  color: '#F8F5F3',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: { xs: '0.9rem', sm: '1rem' },
-                  px: 5,
-                  py: 1.5,
-                  borderRadius: 'var(--border-radius-sm)',
-                  fontWeight: 600,
-                  mt: 1,
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'var(--shadow-lg)',
-                  },
-                }}
-              >
-                Descubrir destinos
-              </Button>
+                <Box
+                  component="img"
+                  src="/images/santa-rosa_hero.svg"
+                  alt="Santa Rosa de Calamuchita"
+                  sx={{
+                    width: { xs: '100%', md: '85%' },
+                    maxWidth: { xs: '100%', md: '500px' },
+                    height: 'auto',
+                    mx: { xs: 'auto', md: 0 },
+                    filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
+                  }}
+                />
+              </motion.div>
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'flex-start' }, mb: 2 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: 'rgba(248, 245, 243, 0.9)',
+                    maxWidth: 520,
+                    mx: { xs: 'auto', md: 0 },
+                    lineHeight: 1.5,
+                    fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
+                    fontStyle: 'italic',
+                  }}
+                >
+                  "Hay lugares donde uno se queda y lugares que se quedan en uno"
+                </Typography>
+                <Button
+                  variant="contained"
+                  component={RouterLink}
+                  to="/visitar"
+                  sx={{
+                    background: municipalGradients.principal,
+                    color: '#F8F5F3',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: { xs: '0.9rem', sm: '1rem' },
+                    px: 5,
+                    py: 1.5,
+                    borderRadius: 'var(--border-radius-sm)',
+                    fontWeight: 600,
+                    ml: { xs: 0, md: 3 },
+                    mt: { xs: 1, md: 0 },
+                    whiteSpace: 'nowrap',
+                    '&:hover': {
+                      transform: 'translateY(-2px)',
+                      boxShadow: 'var(--shadow-lg)',
+                    },
+                  }}
+                >
+                  Descubrir destinos
+                </Button>
+              </Box>
+
             </Box>
 
+            {/* RIGHT COLUMN: SearchBar + ClimaWidget */}
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'flex-start',
-                justifyContent: { xs: 'center', md: 'flex-end' },
-                gap: { xs: 2, md: 3 },
+                flexDirection: { xs: 'column', md: 'row' },
                 flexWrap: { xs: 'wrap', md: 'nowrap' },
+                gap: { xs: 2, md: 3 },
+                alignItems: { xs: 'center', md: 'center' },
+                justifyContent: { xs: 'center', md: 'flex-end' },
               }}
             >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...SPRING_GENTLE, delay: 0.5 }}
-                style={{ width: '100%', maxWidth: 680 }}
               >
-                <SearchBar items={searchIndex} />
+                <Box
+                  sx={{
+                    flexGrow: 1,
+                    minWidth: 330,
+                    width: '100%',
+                  }}
+                >
+                  <SearchBar items={searchIndex} />
+                </Box>
               </motion.div>
 
               <motion.div
@@ -330,6 +235,7 @@ export default function Home() {
                 <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
               </motion.div>
             </Box>
+
           </Box>
         </Container>
       </Box>
@@ -387,131 +293,40 @@ export default function Home() {
               />
               <HighlightCard
                 title="Qué Visitar"
-                description="Atractivos naturales, culturales y de interés que no podés dejar de conocer."
-                gradient={municipalGradients.ocean}
+                description="Explorá los mejores atractivos naturales, culturales y de interés de la región."
+                gradient={municipalGradients.principal}
                 to="/visitar"
                 delay={0.1}
               />
               <HighlightCard
                 title="Qué Hacer"
-                description="Actividades, deportes y experiencias para disfrutar en cualquier temporada."
-                gradient={municipalGradients.sunset}
+                description="Actividades al aire libre, deportes, cultura y entretenimiento para toda la familia."
+                gradient={municipalGradients.turquesa}
                 to="/hacer"
                 delay={0.15}
               />
+              <HighlightCard
+                title="Eventos"
+                description="Agenda de festivales, ferias y celebraciones durante todo el año."
+                gradient={municipalGradients.sunset}
+                to="/eventos"
+                delay={0.2}
+              />
+              <HighlightCard
+                title="Dónde Dormir"
+                description="Encontrá tu alojamiento ideal: hoteles, cabañas, hostels y más."
+                gradient={municipalGradients.citrus}
+                to="/alojamientos"
+                delay={0.25}
+              />
+              <HighlightCard
+                title="Dónde Comer"
+                description="Descubrí la gastronomía local: restaurantes, pizzerías, heladerías y más."
+                gradient={municipalGradients.tropical}
+                to="/gastronomia"
+                delay={0.3}
+              />
             </Box>
-          </motion.div>
-        </Container>
-      </section>
-
-      <Box sx={{ height: { xs: 60, md: 100 } }} />
-
-      <section style={{ padding: 'var(--spacing-xl-md) 0', background: 'var(--color-surface)' }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={SPRING_STANDARD}
-          >
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 700,
-                textAlign: 'center',
-                mb: 1,
-                color: 'var(--color-text-primary)',
-                fontSize: { xs: '1.6rem', sm: '2rem', md: '2.5rem' },
-              }}
-            >
-              Explorá por categoría
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{
-                textAlign: 'center',
-                maxWidth: 700,
-                mx: 'auto',
-                lineHeight: 1.7,
-                mb: 5,
-              }}
-            >
-              Encontrá el plan ideal según lo que más te guste hacer.
-            </Typography>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={STAGGER_FAST}
-          >
-            <Box sx={{ display: 'grid', gap: 3, gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' } }}>
-              <CategoryTile title="Eventos" count={17} gradient={municipalGradients.turquesa} to="/eventos" delay={0.05} />
-              <CategoryTile title="Qué Hacer" count={24} gradient={municipalGradients.sunset} to="/hacer" delay={0.1} />
-              <CategoryTile title="Qué Visitar" count={24} gradient={municipalGradients.ocean} to="/visitar" delay={0.15} />
-              <CategoryTile title="Información" count={8} gradient={municipalGradients.naturaleza} to="/informacion" delay={0.2} />
-            </Box>
-          </motion.div>
-        </Container>
-      </section>
-
-      <Box sx={{ height: { xs: 60, md: 100 } }} />
-
-      <section style={{ padding: 'var(--spacing-xl-md) 0', background: 'var(--color-background)' }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 }, textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={SPRING_STANDARD}
-          >
-            <Typography
-              variant="h3"
-              component="h2"
-              sx={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 700,
-                mb: 2,
-                color: 'var(--color-text-primary)',
-                fontSize: { xs: '1.6rem', sm: '2rem', md: '2.5rem' },
-              }}
-            >
-              ¿Listo para vivir Santa Rosa?
-            </Typography>
-            <Typography
-              variant="body1"
-              color="text.secondary"
-              sx={{
-                maxWidth: 700,
-                mx: 'auto',
-                lineHeight: 1.7,
-                mb: 4,
-              }}
-            >
-              Te esperamos todo el año con propuestas únicas en el corazón del Valle de Calamuchita.
-            </Typography>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/visitar"
-              sx={{
-                background: municipalGradients.principal,
-                color: '#F8F5F3',
-                fontFamily: 'var(--font-body)',
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                px: 5,
-                py: 1.5,
-                borderRadius: 'var(--border-radius-sm)',
-                fontWeight: 600,
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: 'var(--shadow-lg)',
-                },
-              }}
-            >
-              Planificá tu visita
-            </Button>
           </motion.div>
         </Container>
       </section>
