@@ -558,8 +558,8 @@ export default function Header() {
           sx={{
             zIndex: (theme) => theme.zIndex.drawer + 1,
             backgroundColor: 'rgba(26, 32, 44, 0.6)',
-            backdropFilter: 'blur(20px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+            backdropFilter: 'blur(6px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(6px) saturate(180%)',
             boxShadow: 'none',
           }}
         >
