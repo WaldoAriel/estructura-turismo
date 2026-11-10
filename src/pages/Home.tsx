@@ -1,9 +1,12 @@
 import { Box, Typography, Container, Button, Link as MuiLink } from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
+import { useState } from 'react'
 import { SPRING_STANDARD, SPRING_GENTLE, STAGGER_FAST } from '../config/animations'
 import { municipalGradients, municipalPalette } from '../config/theme'
 import SearchBar from '../components/SearchBar'
+import ClimaWidget from '../components/ClimaWidget'
+import ClimaModal from '../components/ClimaModal'
 import { searchIndex } from '../data/searchIndex'
 import Footer from '../components/Footer'
 
@@ -213,6 +216,8 @@ const CategoryTile = ({
 }
 
 export default function Home() {
+  const [climaModalOpen, setClimaModalOpen] = useState(false)
+
   return (
     <>
       <Box
@@ -304,6 +309,8 @@ export default function Home() {
                 display: 'flex',
                 alignItems: 'flex-start',
                 justifyContent: { xs: 'center', md: 'flex-end' },
+                gap: { xs: 2, md: 3 },
+                flexWrap: { xs: 'wrap', md: 'nowrap' },
               }}
             >
               <motion.div
@@ -313,6 +320,14 @@ export default function Home() {
                 style={{ width: '100%', maxWidth: 680 }}
               >
                 <SearchBar items={searchIndex} />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...SPRING_GENTLE, delay: 0.6 }}
+              >
+                <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
               </motion.div>
             </Box>
           </Box>
@@ -502,6 +517,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <ClimaModal open={climaModalOpen} onClose={() => setClimaModalOpen(false)} />
     </>
   )
 }

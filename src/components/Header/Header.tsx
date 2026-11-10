@@ -24,8 +24,6 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import Close from '@mui/icons-material/Close'
 import { topMenuItems, drawerMenuSections, type MenuItem as NavItem, type TopMenuItem } from './menuData'
 import { SPRING_STANDARD, SPRING_GENTLE } from '../../config/animations'
-import ClimaWidget from '../ClimaWidget'
-import ClimaModal from '../ClimaModal'
 
 const BANNER_STORAGE_KEY = 'bannerDismissed'
 
@@ -523,7 +521,6 @@ export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [bannerOpen, setBannerOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [climaModalOpen, setClimaModalOpen] = useState(false)
 
   useEffect(() => {
     if (!localStorage.getItem(BANNER_STORAGE_KEY) && window.location.pathname === '/') {
@@ -638,10 +635,6 @@ export default function Header() {
                 ))}
               </motion.div>
 
-              <Box sx={{ display: 'flex', alignItems: 'center', ml: { xs: 0, sm: 'auto', md: 2 } }}>
-                <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
-              </Box>
-
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -709,7 +702,6 @@ export default function Header() {
           </Box>
         </motion.div>
       </Modal>
-      <ClimaModal open={climaModalOpen} onClose={() => setClimaModalOpen(false)} />
     </>
   )
 }
