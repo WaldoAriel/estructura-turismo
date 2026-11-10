@@ -94,7 +94,7 @@ export default function Home() {
     <>
       <Box
         sx={{
-          position: 'relative',
+          position: 'inherit',
           minHeight: { xs: 'auto', md: '100vh' },
           width: '100%',
           overflow: 'hidden',
@@ -114,7 +114,7 @@ export default function Home() {
         <Container
           maxWidth="lg"
           sx={{
-            position: 'relative',
+            position: 'absolute',
             zIndex: 1,
             pt: { xs: 12, sm: 14, md: 16 },
             pb: { xs: 4, md: 6 },
@@ -148,12 +148,12 @@ export default function Home() {
                   component="img"
                   src="/images/santa-rosa_hero.svg"
                   alt="Santa Rosa de Calamuchita"
+                  className="hero-logo"
                   sx={{
                     width: { xs: '100%', md: '85%' },
                     maxWidth: { xs: '100%', md: '500px' },
                     height: 'auto',
                     mx: { xs: 'auto', md: 0 },
-                    filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.4))',
                   }}
                 />
               </motion.div>

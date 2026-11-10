@@ -241,3 +241,27 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-light);
 }
+
+/* Float + Glow animation for hero logo */
+@keyframes floatGlow {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  }
+  50% {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 8px 20px rgba(248,156,50,0.3));
+  }
+}
+
+/* Hero logo hover effect */
+.hero-logo {
+  animation: floatGlow 4s ease-in-out infinite;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.hero-logo:hover {
+  animation-duration: 1.5s;
+  filter: drop-shadow(0 8px 24px rgba(248,156,50,0.5)) drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+  transform: translateY(-2px);
+}
