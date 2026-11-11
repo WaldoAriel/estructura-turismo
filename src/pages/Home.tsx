@@ -98,7 +98,7 @@ export default function Home() {
           minHeight: { xs: 'auto', md: '100vh' },
           width: '100%',
           overflow: 'hidden',
-          pb: { xs: 12, md: 16 },
+          pb: { xs: 6, md: 16 },
         }}
       >
         <Box
@@ -111,9 +111,10 @@ export default function Home() {
         <Container
           maxWidth="lg"
           sx={{
-            position: 'absolute',
+            position: { xs: 'relative', md: 'absolute' },
             zIndex: 1,
-            pt: { xs: 10, sm: 14, md: 20 },
+            width: '100%',
+            pt: { xs: 8, sm: 10, md: 15 },
             pb: { xs: 4, md: 6 },
             px: { xs: 2, sm: 3, md: 4 },
             textAlign: { xs: 'center', md: 'left' },
@@ -149,6 +150,7 @@ export default function Home() {
                   sx={{
                     width: { xs: '100%', md: '85%' },
                     maxWidth: { xs: '100%', md: '425px', lg: '510px', xl: '595px' },
+                    maxHeight: { xs: '200px', md: 'none' },
                     height: 'auto',
                     mx: { xs: 'auto', md: 0 },
                     position: 'relative',
@@ -188,7 +190,7 @@ export default function Home() {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+                flexDirection: { xs: 'column', sm: 'row' },
                 flexWrap: { xs: 'wrap', md: 'nowrap' },
                 gap: { xs: 2, sm: 2.5, md: 3, lg: 4 },
                 alignItems: { xs: 'center', md: 'flex-start' },
@@ -203,8 +205,9 @@ export default function Home() {
                 <Box
                   sx={{
                     flexGrow: 1,
-                    minWidth: 280,
+                    minWidth: 350,
                     width: '100%',
+                    maxWidth: { xs: '100%', sm: '400px' },
                   }}
                 >
                   <SearchBar items={searchIndex} />
@@ -224,7 +227,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      <Box sx={{ height: { xs: 120, md: 100 } }} />
+      <Box sx={{ height: { xs: 80, sm: 100, md: 100 } }} />
 
       <section style={{ padding: 'var(--spacing-xl-md) 0', background: 'var(--color-background)' }}>
         <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>

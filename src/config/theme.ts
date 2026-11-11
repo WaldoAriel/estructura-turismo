@@ -188,6 +188,7 @@ export const transitions = {
 }
 
 export const zIndex = {
+  drawer: 1200,
   dropdown: 1000,
   sticky: 1100,
   modal: 1300,
