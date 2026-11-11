@@ -94,13 +94,10 @@ export default function Home() {
     <>
       <Box
         sx={{
-          position: 'inherit',
+          position: 'relative',
           minHeight: { xs: 'auto', md: '100vh' },
           width: '100%',
           overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           pb: { xs: 12, md: 16 },
         }}
       >
@@ -116,7 +113,7 @@ export default function Home() {
           sx={{
             position: 'absolute',
             zIndex: 1,
-            pt: { xs: 12, sm: 14, md: 16 },
+            pt: { xs: 10, sm: 14, md: 20 },
             pb: { xs: 4, md: 6 },
             px: { xs: 2, sm: 3, md: 4 },
             textAlign: { xs: 'center', md: 'left' },
@@ -125,8 +122,8 @@ export default function Home() {
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
-              gap: { xs: 4, md: 6 },
+              gridTemplateColumns: { xs: '1fr', md: '1fr 1fr', lg: '1.2fr 0.8fr' },
+              gap: { xs: 4, md: 6, lg: 8 },
               alignItems: 'flex-start',
             }}
           >
@@ -136,7 +133,7 @@ export default function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 3,
-                alignItems: { xs: 'center', md: 'flex-start' },
+                alignItems: { xs: 'center', md: 'center' },
               }}
             >
               <motion.div
@@ -151,27 +148,16 @@ export default function Home() {
                   className="hero-logo"
                   sx={{
                     width: { xs: '100%', md: '85%' },
-                    maxWidth: { xs: '100%', md: '500px' },
+                    maxWidth: { xs: '100%', md: '425px', lg: '510px', xl: '595px' },
                     height: 'auto',
                     mx: { xs: 'auto', md: 0 },
+                    position: 'relative',
+                    zIndex: 1300,
                   }}
                 />
               </motion.div>
 
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'flex-start' }, mb: 2 }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    color: 'rgba(248, 245, 243, 0.9)',
-                    maxWidth: 520,
-                    mx: { xs: 'auto', md: 0 },
-                    lineHeight: 1.5,
-                    fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' },
-                    fontStyle: 'italic',
-                  }}
-                >
-                  "Hay lugares donde uno se queda y lugares que se quedan en uno"
-                </Typography>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mb: 2 }}>
                 <Button
                   variant="contained"
                   component={RouterLink}
@@ -185,8 +171,6 @@ export default function Home() {
                     py: 1.5,
                     borderRadius: 'var(--border-radius-sm)',
                     fontWeight: 600,
-                    ml: { xs: 0, md: 3 },
-                    mt: { xs: 1, md: 0 },
                     whiteSpace: 'nowrap',
                     '&:hover': {
                       transform: 'translateY(-2px)',
@@ -204,10 +188,10 @@ export default function Home() {
             <Box
               sx={{
                 display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
+                flexDirection: { xs: 'column', sm: 'column', md: 'row' },
                 flexWrap: { xs: 'wrap', md: 'nowrap' },
-                gap: { xs: 2, md: 3 },
-                alignItems: { xs: 'center', md: 'center' },
+                gap: { xs: 2, sm: 2.5, md: 3, lg: 4 },
+                alignItems: { xs: 'center', md: 'flex-start' },
                 justifyContent: { xs: 'center', md: 'flex-end' },
               }}
             >
@@ -219,7 +203,7 @@ export default function Home() {
                 <Box
                   sx={{
                     flexGrow: 1,
-                    minWidth: 330,
+                    minWidth: 280,
                     width: '100%',
                   }}
                 >
@@ -240,7 +224,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      <Box sx={{ height: { xs: 60, md: 100 } }} />
+      <Box sx={{ height: { xs: 120, md: 100 } }} />
 
       <section style={{ padding: 'var(--spacing-xl-md) 0', background: 'var(--color-background)' }}>
         <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>

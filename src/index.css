@@ -23,7 +23,7 @@ body {
 }
 
 .main-content {
-  margin-top: 120px;
+  /* margin-top: 120px;  // Eliminado: el Container ya tiene pt que coincide con el header */
 }
 
 /* Typography system - Display styles use Inter */

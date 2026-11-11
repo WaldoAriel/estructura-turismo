@@ -557,8 +557,8 @@ export default function Header() {
           className="glass"
           sx={{
             zIndex: (theme) => theme.zIndex.drawer + 1,
-            backgroundColor: 'rgba(26, 32, 44, 0.6)',
-            backdropFilter: 'blur(6px) saturate(180%)',
+            backgroundColor: 'rgba(26, 32, 44, 0.3)',
+            backdropFilter: 'blur(4px) saturate(180%)',
             WebkitBackdropFilter: 'blur(6px) saturate(180%)',
             boxShadow: 'none',
           }}
