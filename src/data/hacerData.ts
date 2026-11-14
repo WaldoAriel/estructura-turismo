@@ -526,13 +526,116 @@ export const natureItems: HacerItem[] = [
     difficulty: 'Baja',
     distance: '6.2 km',
   },
+]
+
+export const balneariosItems: HacerItem[] = [
   {
-    title: 'Costanera y Balnearios',
+    title: 'Parador La Playa',
     description:
-      'A orillas del río Santa Rosa, la costanera ofrece parques, senderos peatonales y áreas recreativas. Los balnearios del Valle de Calamuchita son destinos ideales para disfrutar del agua y la naturaleza.',
+      'Se encuentra cruzando el puente La Olla, a unos 8 km del centro de la ciudad. Es un balneario familiar con playas de arena, ollas de agua y sectores de arboleda. Cuenta con servicios como mesas, bancos, asadores, sanitarios, proveeduría y estacionamiento privado.',
     category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
     gallery: ['/images/placeholder/costanera.svg'],
-    mapUrl: 'https://goo.gl/maps/Y7B2NDCtYqaWYU3j8',
+    mapUrl: 'https://maps.app.goo.gl/Gvk6PAp5d6G8H8YSA',
+  },
+  {
+    title: 'Balneario La Olla',
+    description:
+      'Muy próximo al balneario Miami, se caracteriza por la profundidad de sus aguas, arboleda y grandes piedras que ofrecen sectores de sombra natural y espacios para instalarse a pocos metros de la orilla. De aguas doradas y piletones calados en las piedras. No cuenta con mesas, bancos, asadores ni sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/mtefSVhMwLprGptV6',
+  },
+  {
+    title: 'Balneario Miami',
+    description:
+      'Ubicado a 6 km del centro de la ciudad, se caracteriza por sus playas de gran extensión de arena. Aguas claras, playitas y zonas más profundas. Por sus características es elegido por familias y sobre todo por jóvenes locales y turistas. No cuenta con mesas, bancos, asadores ni sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/SyMQWTiYXLq3zRu38',
+  },
+  {
+    title: 'Playa Mate de Luna',
+    description:
+      'Ideal para las familias, se encuentra en el barrio Santa Mónica. Se caracteriza por sus aguas transparentes y calmas. No posee mesas, sanitarios, bancos ni asadores.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/iDdYcCKkvmsUxSXd9',
+  },
+  {
+    title: 'Playa Piedras Rosadas',
+    description:
+      'Se encuentra a 3 km del centro de la ciudad, en el barrio Santa Rosa del Río, y se llega por Av. Costanera Río Suquía. De aguas cristalinas, cuenta con bancos de arena, espacios de aguas profundas y también de menor profundidad, ideal para los niños. No cuenta con servicios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/NNwwDdB19L7PTaDg8',
+  },
+  {
+    title: 'Balneario Refugio de los Pájaros',
+    description:
+      'Si preferís esquivar las multitudes, es el lugar ideal, con una gran arboleda donde se pueden observar las casitas de los pájaros. Sus aguas poco profundas lo vuelven perfecto para apoyar la reposera en el río y disfrutar. Cuenta con mesas, bancos, asadores, proveeduría y sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/M9tAvEzpVwQBg8AB9',
+  },
+  {
+    title: 'Balneario Santa Rita',
+    description:
+      'A tan solo 15 cuadras del centro, este balneario familiar ofrece una amplia extensión de espacios verdes con juegos para niños. Próximo al Puente de Hierro, es el escenario ideal para llevarte unas hermosas postales de nuestra ciudad. Cuenta con mesas, bancos, asadores, proveeduría y sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/xdhDy8r2yVzW6GJs5',
+  },
+  {
+    title: 'Balneario La Choza',
+    description:
+      'Tiene amplios espacios verdes donde podés disfrutar de los más ricos asados a orillas del río. Para los más chicos hay juegos, heladería y una calesita ideal para entretenerse. Cuenta con mesas, bancos, asadores, proveeduría y sanitarios. También un restaurante con balcón orientado para tener las mejores vistas del río y de las sierras.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/7A4mvVLhtFuXvZwY6',
+  },
+  {
+    title: 'Playa Puente Colgante',
+    description:
+      'Es un lugar perfecto para disfrutar de amplios espacios verdes y aguas cristalinas de poca profundidad, ideal para los más pequeños. No cuenta con mesas, bancos, asadores ni sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/a6pwTxYdZmTkaytr7',
+  },
+  {
+    title: 'Balneario Puchuqui',
+    description:
+      'Elegido por familias y por jóvenes, rodeado por un entorno de frondosos árboles que en verano regalan grandes espacios de sombra. Se encuentra a pocas cuadras del centro de la ciudad. Cuenta con mesas, bancos, asadores, bar y sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/Vu9Lx84hNwEC3NXK7',
+  },
+  {
+    title: 'Balneario Playa Soleada',
+    description:
+      'Cuenta con aguas poco profundas, por eso es elegido principalmente por las familias. Tiene además pista de skate, cancha de fútbol, básquet y un amplio espacio verde arbolado. Allí podrás encontrar una proveeduría y restaurante que funcionan todo el año. Cuenta con mesas, bancos, asadores y sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/3oygckYJFMjPw4VB8',
+  },
+  {
+    title: 'Playa La Rinconada',
+    description:
+      'Es uno de los rincones más tranquilos, agrestes y familiares de Santa Rosa de Calamuchita. Se destaca por estar alejada del bullicio céntrico, ofreciendo un verdadero remanso de paz. No cuenta con mesas, bancos, asadores ni sanitarios.',
+    category: 'naturaleza',
+    subcategory: 'Costanera y Balnearios',
+    gallery: ['/images/placeholder/costanera.svg'],
+    mapUrl: 'https://maps.app.goo.gl/2SSq6n6tDGLwtYE26',
   },
 ]
 
@@ -726,6 +829,15 @@ export const visitarCategories: VisitCategory[] = [
     description:
       'Hacé una pausa y descubrí la naturaleza en su estado más puro. Contemplá las sierras, caminá junto al río transparente y disfrutá de los paisajes maravillosos que te esperan a cada paso. En nuestra ciudad, lo simple se transforma en un recuerdo inolvidable. ¿Te lo vas a perder?',
     items: natureItems,
+    subcategories: [
+      {
+        name: 'costanera-y-balnearios',
+        label: 'Costanera y Balnearios',
+        description:
+          'A lo largo del río Santa Rosa se despliega una amplia red de balnearios y paradores con playas, asadores, mesas, bancos y áreas de juegos. Hay opciones cerca del centro y en zonas más tranquilas para disfrutar el río y la costanera.',
+        items: balneariosItems,
+      },
+    ],
   },
   {
     name: 'cultura',
@@ -778,6 +890,7 @@ export const visitarSubcategoryGradients: Record<string, string> = {
   Esparcimiento: 'linear-gradient(135deg, #3AABB5, #0E98AE)',
   Artesanos: 'linear-gradient(135deg, #F89C32, #B9CF41)',
   'Camino del Productor': 'linear-gradient(135deg, #F89C32, #F37335)',
+  'Costanera y Balnearios': 'linear-gradient(135deg, #0E98AE, #3AABB5)',
 }
 
 export const seasonData = [

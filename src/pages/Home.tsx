@@ -1,7 +1,7 @@
-import { Box, Typography, Container, Button, Link as MuiLink } from '@mui/material'
+import { Box, Typography, Container, Button, Link as MuiLink, Chip } from '@mui/material'
 import { motion } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SPRING_STANDARD, SPRING_GENTLE, STAGGER_FAST } from '../config/animations'
 import { municipalGradients } from '../config/theme'
 import SearchBar from '../components/SearchBar'
@@ -9,6 +9,8 @@ import ClimaWidget from '../components/ClimaWidget'
 import ClimaModal from '../components/ClimaModal'
 import { searchIndex } from '../data/searchIndex'
 import Footer from '../components/Footer'
+import { fetchCurrentWeather } from '../utils/weather'
+import { getActivityRecommendations } from '../utils/recommendations'
 
 const HighlightCard = ({
   title,
@@ -89,6 +91,22 @@ const HighlightCard = ({
 
 export default function Home() {
   const [climaModalOpen, setClimaModalOpen] = useState(false)
+  const [currentWeather, setCurrentWeather] = useState<{temperature: number; weathercode: number} | null>(null)
+
+  // useEffect para fetch del clima
+  useEffect(() => {
+    let mounted = true
+    fetchCurrentWeather().then((data) => {
+      if (!mounted) return
+      if (data && data.temperature !== undefined) {
+        setCurrentWeather({
+          temperature: Math.round(data.temperature),
+          weathercode: data.weathercode,
+        })
+      }
+    })
+    return () => { mounted = false }
+  }, [])
 
   return (
     <>
@@ -186,41 +204,94 @@ export default function Home() {
 
             </Box>
 
-            {/* RIGHT COLUMN: SearchBar + ClimaWidget */}
+            {/* RIGHT COLUMN: SearchBar + ClimaWidget + Recomendaciones */}
             <Box
               sx={{
+                width: '100%',
                 display: 'flex',
-                flexDirection: { xs: 'column', sm: 'row' },
-                flexWrap: { xs: 'wrap', md: 'nowrap' },
-                gap: { xs: 2, sm: 2.5, md: 3, lg: 4 },
-                alignItems: { xs: 'center', md: 'flex-start' },
-                justifyContent: { xs: 'center', md: 'flex-end' },
+                flexDirection: 'column',
+                gap: 2,
               }}
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...SPRING_GENTLE, delay: 0.5 }}
+              {/* SearchBar + ClimaWidget en fila en sm+ */}
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  flexWrap: { xs: 'wrap', md: 'nowrap' },
+                  gap: { xs: 2, sm: 2.5 },
+                  width: '100%',
+                }}
               >
-                <Box
-                  sx={{
-                    flexGrow: 1,
-                    minWidth: 350,
-                    width: '100%',
-                    maxWidth: { xs: '100%', sm: '400px' },
-                  }}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...SPRING_GENTLE, delay: 0.5 }}
                 >
-                  <SearchBar items={searchIndex} />
-                </Box>
-              </motion.div>
+                  <Box
+                    sx={{
+                      flexGrow: 1,
+                      minWidth: 350,
+                      width: '100%',
+                      maxWidth: { xs: '100%', sm: '400px' },
+                    }}
+                  >
+                    <SearchBar items={searchIndex} />
+                  </Box>
+                </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...SPRING_GENTLE, delay: 0.6 }}
-              >
-                <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...SPRING_GENTLE, delay: 0.6 }}
+                >
+                  <ClimaWidget onOpenModal={() => setClimaModalOpen(true)} />
+                </motion.div>
+              </Box>
+
+              {/* Recomendaciones de actividad según el clima */}
+              {currentWeather && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...SPRING_GENTLE, delay: 0.7 }}
+                >
+                  <Box
+                    sx={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.35)',
+                      backdropFilter: 'blur(2px) saturate(100%)',
+                      WebkitBackdropFilter: 'blur(4px) saturate(180%)',
+                      borderRadius: '999px',
+                      padding: '8px 16px',
+                      marginTop: '50px',
+                      border: 'none',
+                      textAlign: 'center',
+                      transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+                      '&:hover': {
+                        backgroundColor: 'rgba(255,255,255,0.5)',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                      },
+                      '&:focus-visible': {
+                        outline: 'none',
+                        backgroundColor: 'rgba(255,255,255,0.6)',
+                        boxShadow: '0 0 0 3px rgba(58,171,181,0.4)',
+                      },
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', gap: 1, mb: 0.5, px: 0.5 }}>
+                      <Typography variant="subtitle2" sx={{ color: 'var(--color-text-secondary)', fontWeight: 600, fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        ¿Qué hacer hoy?
+                      </Typography>
+                      <Box component={RouterLink} to={getActivityRecommendations(currentWeather)[0]?.action} sx={{ textDecoration: 'none', cursor: 'pointer', pointerEvents: 'auto' }}>
+                        <Chip label={getActivityRecommendations(currentWeather)[0]?.label} sx={{ m: 0 }} />
+                      </Box>
+                    </Box>
+                    <Typography variant="caption" sx={{ color: 'var(--color-text-secondary)', fontSize: '0.7rem', textAlign: 'center', width: '100%', p: 0 }}>
+                      {getActivityRecommendations(currentWeather)[0]?.description}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              )}
             </Box>
 
           </Box>

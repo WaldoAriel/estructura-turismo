@@ -43,8 +43,10 @@ export default function VisitarDetalle() {
     }
   })
 
+  type ListEntry = HacerItem & { __subcategorySlug?: string }
+
   let singleItem: HacerItem | null = null
-  let itemsToShow: HacerItem[] = []
+  let itemsToShow: ListEntry[] = []
   let currentLabel: string = categoryData.label
   let currentSubcategory: VisitSubcategory | undefined
   let breadcrumbs: { label: string; href?: string }[] = [
@@ -101,7 +103,18 @@ export default function VisitarDetalle() {
   }
 
   const resolveSubcategory = (sub: VisitSubcategory) => {
-    itemsToShow = sub.items || []
+    const introItems: ListEntry[] =
+          sub.label === 'Costanera y Balnearios'
+        ? [
+            {
+              title: 'Nuestra Costanera',
+              description:
+                'La costanera del río Santa Rosa es el eje recreativo principal de la ciudad. Combina la preservación del ecosistema serrano con infraestructura de mantenimiento, cartelería indicativa y depósitos de residuos. Su recorrido, adaptado para peatones, ciclistas y vehículos, articula balnearios y paseos como la Rambla de las Fuentes, la Plaza de la Familia y el Paseo del Remanso.',
+              category: categoryData.name,
+            },
+          ]
+        : []
+    itemsToShow = [...introItems, ...(sub.items || [])]
     currentLabel = sub.label
     currentSubcategory = sub
     breadcrumbs = [...baseBreadcrumbs, { label: sub.label }]
@@ -113,13 +126,21 @@ export default function VisitarDetalle() {
   if (slugToResolve) {
     const resolvedItem = foundItemBySlug(slugToResolve, allItems)
     const resolvedSub = foundSubcategoryBySlug(slugToResolve)
-    if (resolvedItem) {
-      resolveItem(resolvedItem)
-    } else if (resolvedSub) {
+    if (resolvedSub) {
       resolveSubcategory(resolvedSub)
+    } else if (resolvedItem) {
+      resolveItem(resolvedItem)
     }
   } else {
-    itemsToShow = allItems
+    itemsToShow = [
+      ...(categoryData.items || []),
+      ...(categoryData.subcategories || []).map((sub) => ({
+        title: sub.label,
+        description: sub.description || '',
+        category: categoryData.name,
+        __subcategorySlug: slugify(sub.label),
+      })),
+    ]
   }
 
   const baseGradient = visitarCategoryGradients[categoryData.label] || municipalGradients.ocean
@@ -231,38 +252,12 @@ export default function VisitarDetalle() {
 
       <section style={{ padding: 'var(--spacing-xl) 0', background: 'var(--color-background)' }}>
         <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-          {!subcategory && !itemParam && categoryData.subcategories && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ ...SPRING_STANDARD, delay: 0.06 }}
-            >
-              <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', justifyContent: 'center', mb: 6 }}>
-                {categoryData.subcategories.map((sub) => (
-                  <Chip
-                    key={sub.name}
-                    label={sub.label}
-                    clickable
-                    component="a"
-                    href={`/visitar/${categoryData.name}/${slugify(sub.label)}`}
-                    sx={{
-                      backgroundColor: 'rgba(58, 171, 181, 0.1)',
-                      color: 'var(--color-primary-dark)',
-                      fontWeight: 600,
-                      border: '1px solid rgba(58, 171, 181, 0.3)',
-                    }}
-                  />
-                ))}
-              </Box>
-            </motion.div>
-          )}
-
           <motion.div
             initial="hidden"
             animate="visible"
             variants={STAGGER_FAST}
           >
-            {itemsToShow.map((item: HacerItem, index: number) => {
+            {itemsToShow.map((item: ListEntry, index: number) => {
               const isChildItem = item.children && singleItem?.children !== item.children
               const isSingle = singleItem && !singleItem.children?.length
               const isEven = index % 2 === 0
@@ -672,6 +667,23 @@ export default function VisitarDetalle() {
                                   cursor: 'pointer',
                                 }}
                               />
+                            </Link>
+                          </Box>
+                        )}
+                        {(item.__subcategorySlug ||
+                          categoryData.subcategories?.some((s) => slugify(s.label) === slugify(item.title))) && (
+                          <Box sx={{ mt: 1.5 }}>
+                            <Link
+                              component={RouterLink}
+                              to={`/visitar/${categoryData.name}/${item.__subcategorySlug || slugify(item.title)}`}
+                              underline="none"
+                              sx={{
+                                color: 'var(--color-secondary)',
+                                fontWeight: 600,
+                                fontSize: '0.85rem',
+                              }}
+                            >
+                              Ver balnearios →
                             </Link>
                           </Box>
                         )}
