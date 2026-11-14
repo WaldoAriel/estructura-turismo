@@ -14,7 +14,7 @@ export interface SearchItem {
   id: string
   title: string
   description: string
-  type: 'hacer' | 'evento' | 'informacion' | 'alojamiento' | 'gastronomia'
+  type: 'hacer' | 'visitar' | 'evento' | 'informacion' | 'alojamiento' | 'gastronomia'
   url: string
   category?: string
   external?: boolean
@@ -60,6 +60,7 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
 
   const typeLabels: Record<string, string> = {
     hacer: 'Qué Hacer',
+    visitar: 'Qué Visitar',
     evento: 'Eventos',
     informacion: 'Información',
     alojamiento: 'Alojamientos',
@@ -68,6 +69,7 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
 
   const typeColors: Record<string, string> = {
     hacer: municipalPalette.turquoise,
+    visitar: municipalPalette.green,
     evento: municipalPalette.orange,
     informacion: municipalPalette.teal,
     alojamiento: municipalPalette.amber,

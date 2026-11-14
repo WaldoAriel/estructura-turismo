@@ -1,4 +1,4 @@
-import { hacerCategories } from './hacerData'
+import { hacerCategories, visitarCategories } from './hacerData'
 import { summerEvents, autumnEvents, winterEvents, springEvents } from './eventosData'
 import {
   infoPages,
@@ -17,7 +17,69 @@ import type { SearchItem } from '../components/SearchBar'
 import alojamientos from './externals/alojamientos.json'
 import gastronomia from './externals/gastronomia.json'
 
+const slugify = (text: string): string =>
+  text
+    .toLowerCase()
+    .replace(/[áàâäãå]/g, 'a')
+    .replace(/[éèêë]/g, 'e')
+    .replace(/[íìîï]/g, 'i')
+    .replace(/[óòôöõ]/g, 'o')
+    .replace(/[úùûü]/g, 'u')
+    .replace(/ñ/g, 'n')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
 export const searchIndex: SearchItem[] = [
+  // --- Visitar items ---
+  ...visitarCategories.flatMap((cat) => {
+    const entries: SearchItem[] = []
+
+    entries.push({
+      id: `visitar-cat-${cat.name}`,
+      title: cat.label,
+      description: cat.description,
+      type: 'visitar' as const,
+      url: `/visitar/${cat.name}`,
+      category: cat.label,
+    })
+
+    ;(cat.items || []).forEach((item) => {
+      entries.push({
+        id: `visitar-${cat.name}-${slugify(item.title)}`,
+        title: item.title,
+        description: item.description,
+        type: 'visitar' as const,
+        url: `/visitar/${cat.name}`,
+        category: cat.label,
+      })
+    })
+
+    ;(cat.subcategories || []).forEach((sub) => {
+      const subSlug = slugify(sub.label)
+      entries.push({
+        id: `visitar-sub-${cat.name}-${subSlug}`,
+        title: sub.label,
+        description: sub.description || `${sub.label} en ${cat.label}`,
+        type: 'visitar' as const,
+        url: `/visitar/${cat.name}/${subSlug}`,
+        category: cat.label,
+      })
+
+      ;(sub.items || []).forEach((item) => {
+        entries.push({
+          id: `visitar-${cat.name}-${subSlug}-${slugify(item.title)}`,
+          title: item.title,
+          description: item.description,
+          type: 'visitar' as const,
+          url: `/visitar/${cat.name}/${subSlug}`,
+          category: sub.label,
+        })
+      })
+    })
+
+    return entries
+  }),
+
   // --- Hacer items ---
   ...hacerCategories.flatMap((cat) =>
     cat.items.map((item) => ({
