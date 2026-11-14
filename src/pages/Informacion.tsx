@@ -1,6 +1,6 @@
 import { Box, Typography, Container, Card, CardContent, Breadcrumbs, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
-import { useParams } from 'react-router-dom'
+import { Link as RouterLink, useParams } from 'react-router-dom'
 import { infoPages, sobreSantaRosaContent, contactInfo, usefulPhones, distancesFromSantaRosa, distancesToNearby, travelGuides, travelAgencies, busInfo, flightInfo, faqs } from '../data/infoData'
 import { SPRING_STANDARD, STAGGER_FAST } from '../config/animations'
 import { municipalGradients } from '../config/theme'
@@ -66,10 +66,13 @@ export default function Informacion() {
                 separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
                 sx={{ mb: 3, justifyContent: 'center' }}
               >
-              <Link href="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+              <Link component={RouterLink} to="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                 Inicio
               </Link>
-              <Typography sx={{ color: '#FFFFFF', fontSize: '0.85rem', fontWeight: 600 }}>Información</Typography>
+              <Link component={RouterLink} to="/informacion" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+                Información
+              </Link>
+              <Typography sx={{ color: '#FFFFFF', fontSize: '0.85rem', fontWeight: 600 }}>{currentPage.title}</Typography>
             </Breadcrumbs>
           </motion.div>
 

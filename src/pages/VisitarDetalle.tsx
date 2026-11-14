@@ -181,7 +181,7 @@ export default function VisitarDetalle() {
               >
               {breadcrumbs.map((bc, idx) =>
                 bc.href ? (
-                  <Link key={idx} href={bc.href} underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+                  <Link key={idx} component={RouterLink} to={bc.href} underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                     {bc.label}
                   </Link>
                 ) : (

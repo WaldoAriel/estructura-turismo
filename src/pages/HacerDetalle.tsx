@@ -1,6 +1,6 @@
 import { Box, Typography, Container, Breadcrumbs, Link, Chip, Icon } from '@mui/material'
 import { motion } from 'framer-motion'
-import { useParams } from 'react-router-dom'
+import { Link as RouterLink, useParams } from 'react-router-dom'
 import { hacerCategories, hacerCategoryGradients, type HacerItem } from '../data/hacerData'
 import { SPRING_STANDARD, STAGGER_FAST, FADE_UP_CHILD } from '../config/animations'
 import { municipalGradients, municipalPalette } from '../config/theme'
@@ -56,10 +56,10 @@ export default function HacerDetalle() {
                 separator={<Icon style={{ fontSize: 16, color: 'rgba(255,255,255,0.6)' }} />}
                 sx={{ mb: 3, justifyContent: 'center' }}
               >
-              <Link href="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+              <Link component={RouterLink} to="/" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                 Inicio
               </Link>
-              <Link href="/hacer" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
+              <Link component={RouterLink} to="/hacer" underline="hover" sx={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem' }}>
                 Qué Hacer
               </Link>
               <Typography sx={{ color: '#FFFFFF', fontSize: '0.85rem', fontWeight: 600 }}>
