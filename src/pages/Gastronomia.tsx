@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Box, Typography, Container, TextField, Pagination, Chip, Stack } from '@mui/material'
 import { Search as SearchIcon } from '@mui/icons-material'
 import { motion } from 'framer-motion'
@@ -21,9 +22,21 @@ const gastronomiaCategoryColors: Record<string, string> = {
 }
 
 export default function Gastronomia() {
+  const [searchParams] = useSearchParams()
   const [query, setQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    const tipo = searchParams.get('tipo')
+    if (tipo) {
+      const match = gastronomiaCATEGORIES.find((c) => c.key.toLowerCase() === tipo.toLowerCase())
+      if (match) {
+        setSelectedCategory(match.key)
+        setPage(1)
+      }
+    }
+  }, [searchParams])
 
   const filtered = query.trim().length >= 2
     ? searchGastronomia(query).filter((a) => !selectedCategory || a.categoria === selectedCategory)
