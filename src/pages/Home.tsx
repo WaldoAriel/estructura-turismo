@@ -190,9 +190,11 @@ export default function Home() {
             <Box
               sx={{
                 width: '100%',
+                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 2,
+                alignItems: { xs: 'stretch', sm: 'flex-start' },
               }}
             >
               {/* SearchBar */}
@@ -200,11 +202,10 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...SPRING_GENTLE, delay: 0.5 }}
+                style={{ width: '100%' }}
               >
                 <Box
                   sx={{
-                    flexGrow: 1,
-                    minWidth: 350,
                     width: '100%',
                     maxWidth: { xs: '100%', sm: '400px' },
                   }}
@@ -218,6 +219,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...SPRING_GENTLE, delay: 0.6 }}
+                style={{ width: '100%' }}
               >
                 <UnifiedWeatherRecsWidget onOpenClimaModal={() => setClimaModalOpen(true)} />
               </motion.div>

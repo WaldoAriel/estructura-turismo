@@ -83,7 +83,7 @@ export default function SearchBar({ items, placeholder = 'Buscar actividades, ev
   }, {})
 
   return (
-    <Box sx={{ position: 'relative', width: '100%', maxWidth: 700, mx: 'auto' }}>
+    <Box sx={{ position: 'relative', width: '100%', minWidth: 0, maxWidth: 700, mx: 'auto' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 50 }}
